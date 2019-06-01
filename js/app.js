@@ -1,4 +1,4 @@
-
+//INITIAL SETUP
 
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
@@ -6,11 +6,37 @@ let ctx = canvas.getContext("2d");
 canvas.width = 350;
 canvas.height = 350;
 
+//VARIABLES 
+
 let frames = 0;
 let currentFrame = 0;
 let obstacles = [];
 let apples = [];
+let health = 300;
 let gameOver = false;
+
+
+// EVENT LISTENERS
+
+
+window.addEventListener("keydown", e => {
+  if (e.keyCode === 38 && rainbowDash.y > 20) {
+    rainbowDash.y -= 1;
+  }
+  if (e.keyCode === 40 && rainbowDash.y < 550) {
+    rainbowDash.y += 1;
+  }
+  if (e.keyCode === 39 && rainbowDash.x < 300) {
+    rainbowDash.x += 7;
+  }
+  if (e.keyCode === 37 && rainbowDash.x > 20) {
+    rainbowDash.x -= 7;
+  }
+});
+
+
+
+// OBJECTS
 
 class Board {
   constructor() {
@@ -29,7 +55,7 @@ class Board {
 }
 
 class Rainbowdash {
-  constructor(x, y, w, h, srcx, srcy, srcw, srch) {
+  constructor(x, y, w, h, srcx, srcy, srcw, srch, health) {
     this.srcx = srcx;
     this.srcy = srcy;
     this.srcw = srcw;
@@ -43,6 +69,8 @@ class Rainbowdash {
     this.img = new Image();
     this.img.src = "./assets/images/poni_001.png";
     this.img.onload = this.draw();
+
+    this.health = health;
   }
 
   draw() {
@@ -57,6 +85,9 @@ class Rainbowdash {
       this.w,
       this.h
     );
+  }
+  receiveDamage(thedamage){
+    this.health -= thedamage;
   }
 }
 
@@ -80,7 +111,8 @@ class Apples {
   }
 }
 
-// INSTANCIAS
+// IMPLEMENTATION
+
 let board = new Board();
 let rainbowDash = new Rainbowdash(150, 270, 115 / 3, 45, 0, 0, 115 / 3, 42);
 // let apple = new Apples(50, 50, 20, 20);
@@ -93,7 +125,7 @@ const hourHand = document.querySelector(".hour-hand");
 // setInterval(setDate, 1000);
 
 
-// FUNCIONES AUXILIARES
+// ANIMATION LOOP
 
 function updateApples() {
   for (let i = 0; i < apples.length; i++) {
@@ -102,8 +134,8 @@ function updateApples() {
   }
   
   if (frames % 50 === 0) {
-    let x = randomRange(0, canvas.width);
-    let y = randomRange(0, canvas.height);
+    let x = randomRange(150, 180);
+    let y = randomRange( 50, canvas.height);
     apples.push(new Apples( x, y, 20, 20, true ));
   }
   //console.log(apples);
@@ -128,26 +160,21 @@ function updateGame() {
   board.draw();
   rainbowDash.draw(); 
   updateApples();
+
+  console.log(getDistance(rainbowDash.x, Apples.y));
+  
 }
-
-window.addEventListener("keydown", e => {
-  if (e.keyCode === 38 && rainbowDash.y > 20) {
-    rainbowDash.y -= 1;
-  }
-  if (e.keyCode === 40 && rainbowDash.y < 550) {
-    rainbowDash.y += 1;
-  }
-  if (e.keyCode === 39 && rainbowDash.x < 300) {
-    rainbowDash.x += 7;
-  }
-  if (e.keyCode === 37 && rainbowDash.x > 20) {
-    rainbowDash.x -= 7;
-  }
-});
-
 start();
 
+//UTILITY FUNCTIONS
 
+function getDistance(x1, y1, x2, y2){
+
+  let xDistance = x2 - x1;
+  let yDistance = y2 - y1;
+
+  return Math.sqrt( Math.pow(xDistance, 2) + Math.pow(yDistance, 2));
+}
 
 function setDate() {
   //console.log('Hi');
