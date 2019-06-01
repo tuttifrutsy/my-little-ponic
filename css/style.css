@@ -7,42 +7,85 @@
   padding: 0;
 }
 
-/* body{
+body{
   font-family: 'Varela Round', sans-serif;
   background-image: url(/assets/images/bkg.png);
-  
-} */
+  background-size: cover;
+  color: white;
+} 
 
-.container{
-  display: flex;
-  width: 100%;
-  height: 100VH;
-
+.logo{
+  padding: 30px;
+  width: 100px;
+  height: 100px;
 }
 
+.player-one img, .player-two img {
+  width: 25px;
+  height: 35px;
+  border-radius: 25%;
+  
+}
 
 #canvas{
-  border: solid 3px#812E85   ;
+  /* border: solid 3px#812E85   ; */
   border-radius: 8px;
-}
+} 
 
-h1{
-  
-  color: rgb(122, 218, 254);
-  font-size: 2em;
+h2{
+  padding:20px 0px 20px 0px ;
+  text-align: left;
+  font-size: 3em;
   font-weight: bold;
-  text-align: center;
-  text-shadow: 2px 4px rgba(41, 253, 45, 0.8)
+  
+  
 }
 
-header img{
-  padding: 20px;
-  width: 50px;
-  height: 50px;
+.control {
+  margin: 10%;
 }
 
 button{
   margin: 5px;
-  width: 100px;
-  height: 50px;
+  width: 50px;
+  height: 30px;
+  border: none;
+  border-radius: 3px;
+  background: #EF476F;
+}
+
+.clock{
+  width: 40px;
+  height: 40px;
+  border: 10px solid white;
+  border-radius: 50%;
+  margin: 10px auto;
+  position: relative;
+  padding: 2px;
+  box-shadow:
+    0 0 0px 4px rgba(0,0,0,0.1),
+    inset 0 0 0 3px #efefef,
+    inset 0 0 10px black,
+    0 0 0 10px rgba(0,0,0,0.2);
+    margin: 20%;
+}
+
+.clock-face{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform: translateY(-3px);
+}
+
+.hand{
+  width: 50%;
+  height: 2px;
+  background: #812E85;
+  position: absolute;
+  top: 50%;
+  transform-origin: 100%;
+  transform: rotate(90deg);
+  transition: all 0.05s;
+  transition-timing-function: cubic-bezier(0.1, 2,7, 0.58, 1);
+
 }
