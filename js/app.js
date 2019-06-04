@@ -13,8 +13,9 @@ let currentFrame = 0;
 let apples = [];
 let trees = [];
 let coins =[];
+let rocks = [];
 
-let gameOver = false;
+// let gameOver = false;
 
 
 // EVENT LISTENERS
@@ -55,8 +56,8 @@ class Board {
   constructor() {
     this.x = 0;
     this.y = 0;
-    this.w = canvas.width;
-    this.h = canvas.height;
+    this.w = canvas.width +50;
+    this.h = canvas.height+100;
     this.img = new Image();
     this.img.src = "/assets/images/ponic-background-02.png";
     this.img.onload = this.draw();
@@ -87,6 +88,7 @@ class Rainbowdash {
     this.gravity = 1;
 
     this.health = 3;
+    this.life =1;
 
     this.counter = 0;
   }
@@ -151,6 +153,7 @@ class Sonic {
     this.img.onload = this.draw();
 
     this.health = 3;
+    this.life = 1;
 
     this.counter = 0;
   }
@@ -228,7 +231,29 @@ class Coin {
     this.speedY = 1;
 
     this.img = new Image();
-    this.img.src = "./assets/images/ponic-manzana-01.png";
+    this.img.src = "/assets/images/ponic-ring-002.png";
+    this.img.onload = this.draw();
+
+    
+  }
+  draw() {
+    if (this.y < canvas.height) {
+      this.y += this.speedY;
+    }
+    ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+  }
+}
+
+class Rocks {
+  constructor(x, y, w, h) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.speedY = 1;
+
+    this.img = new Image();
+    this.img.src = "/assets/images/ponic-piedras-02.png";
     this.img.onload = this.draw();
   }
   draw() {
@@ -267,8 +292,13 @@ class Trees {
 // IMPLEMENTATION
 
 let board = new Board();
-let rainbowDash = new Rainbowdash(150, 270, 115 / 3, 45, 0, 0, 115 / 3, 42);
+let rainbowDash = new Rainbowdash(110, 270, 115 / 3, 45, 0, 0, 115 / 3, 42);
 let sonic = new Sonic(200, 270, 73/2, 45, 0, 0 , 73/2, 45);
+let rainbowDashLife = document.querySelector('#life');
+let rainbowDashPoints = document.querySelector('#points');
+let sonicLife = document.querySelector('#life2');
+let sonicPoints = document.querySelector('#points2');
+
 // let apple = new Apples(50, 50, 20, 20);
 
 const secondHand = document.querySelector(".second-hand");
@@ -280,6 +310,20 @@ const hourHand = document.querySelector(".hour-hand");
 
 
 // ANIMATION LOOP
+
+
+function updateCoins() {
+  for (let i = 0; i < coins.length; i++) {
+    //apples[i].x += -1;
+  coins[i].draw();
+  }
+  
+  if (frames % 50 === 0) {
+    let x = randomRange(100, 200);
+    let y = randomRange( 50, canvas.height);
+    coins.push(new Coin( x, y, 20, 20, true ));
+  }
+ }
 
 function updateApples() {
   for (let i = 0; i < apples.length; i++) {
@@ -293,7 +337,19 @@ function updateApples() {
     apples.push(new Apples( x, y, 20, 20, true ));
   }
   //console.log(apples);
-  
+}
+
+function updateRocks() {
+  for (let i = 0; i < rocks.length; i++) {
+    //apples[i].x += -1;
+    rocks[i].draw();
+  }
+
+  if (frames % 90 === 0) {
+    let x = randomRange(150, 200);
+    let y = randomRange(100, canvas.height);
+    rocks.push(new Rocks(x, y, 20, 20, true));
+  }
 }
 
 function updateTrees(){
@@ -302,16 +358,17 @@ function updateTrees(){
     
     trees[i].draw();
   }
-  if (frames % 100 === 0){
+  if (frames % 120 === 0 ){
    
 
-    let height = randomRange(50, 100);
+    let height = randomRange(50, 90);
     let widht = randomRange( 30, 60);
 
-    let x = randomRange(10, 50);
-    let y = randomRange(10, canvas.height);
+    let x = randomRange(0, 10);
+    let y = randomRange(100, 200);
 
     trees.push(new Trees(x, y, widht, height, true ));
+    trees.push(new Trees(340,80, widht,height,true));
    
   }
 }
@@ -327,6 +384,12 @@ function start() {
   interval = setInterval(updateGame, 1000 / 60);
 }
 
+function gameOver(player){
+  if(player.health === 0){
+    clearInterval(interval);
+  }
+}
+
 function updateGame() {
   if (frames % 8 === 0) {
     currentFrame = ++currentFrame % 2;
@@ -338,77 +401,94 @@ function updateGame() {
   board.draw();
   rainbowDash.draw(); 
   sonic.draw();
-  //updateApples();
+  updateApples();
+  updateCoins();
   updateTrees();
+  updateRocks();
+   gameOver(sonic);
+  gameOver(rainbowDash);
+   checkCollitionSonic();
+  checkCollitionRainbowDash();
+ 
   //checkCollition();
-  // checkCollitionAdd(apples, rainbowDash);
-  // checkCollitionAdd(coins, sonic);
-  // checkCollitionTakeOff(apples, sonic);
-  // checkCollitionTakeOff(apples, sonic);
+  //  checkCollitionAdd(apples, rainbowDash);
+  //  checkCollitionAdd(coins, sonic);
+  //  checkCollitionTakeOff(apples, sonic);
+  //  checkCollitionTakeOff(coins, rainbowDash);
+  
   //console.log(getDistance(rainbowDash.x, Apples.y));
   
 }
 start();
 
+
+// SOUND EFECTS
+
+let fxCoin = new Audio("/assets/sound/MSN_RING.wav");
+let fxApple = new Audio ("/assets/sound/MSN_FRUIT.wav");
+let fxDamage = new Audio ("/assets/sound/FE_MOVE.wav");
+
+
 //UTILITY FUNCTIONS
 
 
-
-
-
-
-
-function checkCollitionAdd(points, player){
-  points.forEach((point, pi) => {
-    if(player.checkAdds(point)){
-      points.splice(pi,1);
-      player.counter ++;
-      //console.log(player.counter);
+function checkCollitionSonic() {
+  coins.forEach((coin, ci) => {
+    if (sonic.checkAdds(coin)) {
+      coins.splice(ci, 1);
+      sonic.counter++;
+      sonicPoints.textContent = sonic.counter;
+      //console.log(sonic.counter, 'Sonic');
+      fxCoin.play();
     }
-  })
-}
-
-function checkCollitionTakeOff(dangers, player){
-  dangers.forEach((danger, di)=>{
-    if(player.checkDamage(danger)){
-      dangers.splice(di, 1);
-      player.health --;
-      console.log(player.health);
-    }
-  })
+     apples.forEach((apple, ai) => {
+      if (sonic.checkDamage(apple)) {
+        apples.splice(ai, 1);
+        sonic.health--;
+        sonicLife.textContent = sonic.health;
+        console.log(sonic.health, 'Sonic');
+        fxDamage.play();
+      }
+    });
+  });
 }
 
 
-// function checkCollition(){
-//   apples.forEach((apple, ai)=>{
-//     if (rainbowDash.checkApples(apple)) {
-//       apples.splice(ai,1);
-//       rainbowDash.counter ++;
-//       console.log(rainbowDash.counter);
-//    }
-//    coins.forEach((coin, ci)=>{
-//      if (rainbowDash.checkCoins(coin)) {
-//        coin.splice(ci,1);
-//        rainbowDash.health --;
-//        console.log(rainbowDash.health);
-//      }
-//    })
-//  });
+function checkCollitionRainbowDash(){
+  apples.forEach((apple, ai)=>{
+    if (rainbowDash.checkAdds(apple)) {
+      apples.splice(ai,1);
+      rainbowDash.counter ++;
+      rainbowDashPoints.textContent = rainbowDash.counter;
+      console.log(rainbowDash.counter);
+       fxApple.play();
+   }
+   coins.forEach((coin, ci)=>{
+     if (rainbowDash.checkDamage(coin)) {
+       coins.splice(ci,1);
+       rainbowDash.health --;
+       rainbowDashLife.textContent = rainbowDash.health;
+       console.log(rainbowDash.health);
+       fxDamage.play();
+     }
+   })
+ });
+}
+
+// function setDate() {
+//   //console.log('Hi');
+//   const now = new Date();
+//   const seconds = now.getSeconds();
+//   const secondsDegrees = (seconds / 60) * 360 + 90;
+//   secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
+//   //console.log(seconds);
+
+//   const mins = now.getMinutes();
+//   const minsDegrees = (mins / 60) * 360 + 90;
+//   minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+
+//   const hour = now.getMinutes();
+//   const hourDegrees = (mins / 12) * 360 + 90;
+//   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 // }
-
-function setDate() {
-  //console.log('Hi');
-  const now = new Date();
-  const seconds = now.getSeconds();
-  const secondsDegrees = (seconds / 60) * 360 + 90;
-  secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-  //console.log(seconds);
-
-  const mins = now.getMinutes();
-  const minsDegrees = (mins / 60) * 360 + 90;
-  minsHand.style.transform = `rotate(${minsDegrees}deg)`;
-
-  const hour = now.getMinutes();
-  const hourDegrees = (mins / 12) * 360 + 90;
-  hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-}
+ 

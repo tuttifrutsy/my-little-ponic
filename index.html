@@ -1,69 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="icon" href="/assets/images/PinClipart.com_rainbow-dash-clipart_2712304.png" type="image" sizes="16x16">
   <link rel="stylesheet" href="css/style.css">
   <title>Ponic Game</title>
 </head>
+
 <body>
 
 
-  
 
-<div class="container">
-  <div class="row">
-    <div class="col">
-      <img src="/assets/images/ponic-logo.png" alt="ponic-logo" class="logo">
-    </div>
-    <div class="col-9">
-      <h2>My little runner  ❤</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <div class="player-one">
-         <img src="/assets/images/poni-move.gif" alt="poni-move">
-           <img src="" alt="">
+
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        <img src="/assets/images/PinClipart.com_rainbow-dash-clipart_2712304.png" alt="ponic-logo" class="logo">
       </div>
 
-      <div class="player-two">
-       <img src="/assets/images/sonic-move.gif" alt="sonic-move">
-       <div class="score">
-         <img src="/assets/images/ponic-manzana-01.png" alt="ponic-manzana-01">
-          <p>qty</p>
-          <img src="/" alt="">
-       </div>
-      </div>
-    </div>
-    
-    <div class="col">
-      <canvas id="canvas" width="350px" height="500"></canvas>
-      
-    </div>
-    <div class="col">
-      <div class="clock">
-        <div class="clock-face" >
-          <div class="hand hour-hand"></div>
-          <div class="hand min-hand"></div>
-          <div class="hand second-hand"></div>
+      <div class="col-6">
+        <div class="clock">
+          <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+          </div>
         </div>
+        
       </div>
-      <div class="control">
+
+      <div class="col-3">
+        <img src="/assets/images/ponic-title-2.png" alt="ponic-title-2" width="120">
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-3">
+
+        <div class="player">
+         
+          
+          <img  class="logo" src="/assets/images/ponic-nube-01.png" alt="ponic-nube-01">
+          <h4>Rainbow Dash</h4>
+
+          <div class="score">
+              <div class="life">
+                <img class="icon" src="/assets/images/Heart_PNG_Image_Free_Download_31683.png" alt="heart">
+                <span id="life">3</span>
+              </div>
+              <div class="points">
+                <img class="icon" src="/assets/images/ponic-manzana-01.png" alt="ponic-manzana-01">
+                <span id="points">0</span>
+              </div>
+              
+            
+          </div>
+
+          <div class="control">
             <button data-key="38">👆🏻</button>
             <button data-key="40">👇🏻</button>
             <button data-key="37">👈🏻</button>
             <button data-key="39">👉🏻</button>
           </div>
-    </div>
-    
-  </div>
-</div>
+        </div>
+      </div>
 
- 
+      <div class="col-6">
+        <canvas id="canvas" width="350px" height="500"></canvas>
+      </div>
+
+      <div class="col-3">
+        <div class="player2">
+
+          <img class="logo" src="/assets/images/sonic-logo-500x375.png" alt="sonic-move">
+          <h4>Sonic</h4><br>
+          <div class="score">
+            <div class="life2">
+              <img  class="icon" src="/assets/images/Heart_PNG_Image_Free_Download_31683.png" alt="ponic-manzana-01">
+              <span id="life2">3</span>
+            </div>
+            <div class="points2">
+              <img class="icon" src="/assets/images/ponic-ring-002.png" alt="ponic-ring-002">
+              <span id="points2">0</span>
+            </div>
+           
+          </div>
+        </div>
+        <div class="control">
+          <button data-key="38">👆🏻</button>
+          <button data-key="40">👇🏻</button>
+          <button data-key="37">👈🏻</button>
+          <button data-key="39">👉🏻</button>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
         
      
 
