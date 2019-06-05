@@ -14,43 +14,61 @@ let apples = [];
 let trees = [];
 let coins =[];
 let rocks = [];
-
+let paint = [];
+let totalPaints = canvas.width/50;
+let keys =[];
 // let gameOver = false;
 
 
 // EVENT LISTENERS
 
 
-window.addEventListener("keydown", e => {
-  if (e.keyCode === 38 && rainbowDash.y > 20) {
-    rainbowDash.y -= 1;
-  }
-  if (e.keyCode === 87 && sonic.y > 20) {
-    sonic.y -= 1;
-  }
-  if (e.keyCode === 40 && rainbowDash.y < 550) {
-    rainbowDash.y += 1;
-  }
-  if (e.keyCode === 88 && sonic.y < 550) {
-    sonic.y += 1;
-  }
-  if (e.keyCode === 39 && rainbowDash.x < 300) {
-    rainbowDash.x += 7;
-  }
-  if (e.keyCode === 68 && sonic.x < 300) {
-    sonic.x += 7;
-  }
-  if (e.keyCode === 37 && rainbowDash.x > 20) {
-    rainbowDash.x -= 7;
-  }
-  if (e.keyCode === 65 && sonic.x > 20) {
-    sonic.x -= 7;
-  }
-});
+ window.addEventListener('keydown',function (e){
+   keys =(keys || []);
+   keys[e.keyCode] = (e.type == "keydown");
+ })
+
+ window.addEventListener('keyup', function(e){
+   keys[e.keyCode] = (e.type == "keydown");
+ })
+
+
+// window.addEventListener("keydown", e => {
+
+//  
+  // if (e.keyCode === 38 && rainbowDash.y > 20) {
+  //   rainbowDash.y -= 1;
+  // }
+  // if (e.keyCode === 87 && sonic.y > 20) {
+  //   sonic.y -= 1;
+  // }
+  // if (e.keyCode === 40 && rainbowDash.y < 550) {
+  //   rainbowDash.y += 1;
+  // }
+  // if (e.keyCode === 88 && sonic.y < 550) {
+  //   sonic.y += 1;
+  // }
+  // if (e.keyCode === 39 && rainbowDash.x < 300) {
+  //   rainbowDash.x += 7;
+  // }
+  // if (e.keyCode === 68 && sonic.x < 300) {
+  //   sonic.x += 7;
+  // }
+  // if (e.keyCode === 37 && rainbowDash.x > 20) {
+  //   rainbowDash.x -= 7;
+  // }
+  // if (e.keyCode === 65 && sonic.x > 20) {
+  //   sonic.x -= 7;
+  // }
+//});
+
 
 
 
 // OBJECTS
+
+
+
 
 class Board {
   constructor() {
@@ -59,7 +77,7 @@ class Board {
     this.w = canvas.width +50;
     this.h = canvas.height+100;
     this.img = new Image();
-    this.img.src = "/assets/images/ponic-background-02.png";
+    this.img.src = "/Ponic/client/assets/images/ponic-background-02.png";
     this.img.onload = this.draw();
   }
 
@@ -82,7 +100,7 @@ class Rainbowdash {
     this.h = h;
 
     this.img = new Image();
-    this.img.src = "./assets/images/poni_001.png";
+    this.img.src = "/Ponic/client/assets/images/poni_001.png";
     this.img.onload = this.draw();
 
     this.gravity = 1;
@@ -149,7 +167,7 @@ class Sonic {
     this.h = h;
 
     this.img = new Image();
-    this.img.src = "/assets/images/sonic_002.png";
+    this.img.src = "/Ponic/client/assets/images/sonic_002.png";
     this.img.onload = this.draw();
 
     this.health = 3;
@@ -206,7 +224,7 @@ class Apples {
     this.speedY = 1;
 
     this.img = new Image();
-    this.img.src = "./assets/images/ponic-manzana-01.png";
+    this.img.src = "/Ponic/client/assets/images/ponic-manzana-01.png";
     this.img.onload = this.draw();
   }
   draw() {
@@ -231,7 +249,7 @@ class Coin {
     this.speedY = 1;
 
     this.img = new Image();
-    this.img.src = "/assets/images/ponic-ring-002.png";
+    this.img.src = "/Ponic/client/assets/images/ponic-ring-002.png";
     this.img.onload = this.draw();
 
     
@@ -253,7 +271,7 @@ class Rocks {
     this.speedY = 1;
 
     this.img = new Image();
-    this.img.src = "/assets/images/ponic-piedras-02.png";
+    this.img.src = "/Ponic/client/assets/images/ponic-piedras-02.png";
     this.img.onload = this.draw();
   }
   draw() {
@@ -273,7 +291,7 @@ class Trees {
     this.gravity = 3;
     
     this.img = new Image();
-    this.img.src = isTop? './assets/images/tree1.png' : './assets/images/tree2.png';
+    this.img.src = isTop? '/Ponic/client/assets/images/tree1.png' : '/Ponic/client/assets/images/tree2.png';
     this.img.onload = this.draw();
   }
   draw(){
@@ -310,6 +328,11 @@ const hourHand = document.querySelector(".hour-hand");
 
 
 // ANIMATION LOOP
+
+
+
+
+
 
 
 function updateCoins() {
@@ -391,32 +414,51 @@ function gameOver(player){
 }
 
 function updateGame() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
   if (frames % 8 === 0) {
     currentFrame = ++currentFrame % 2;
   }
+if (keys && keys[38] && rainbowDash.y > 20) {
+    rainbowDash.y -= 1;
+  }
+  if (keys && keys[87] && sonic.y > 20) {
+    sonic.y -= 1;
+  }
+  if (keys && keys[40] && rainbowDash.y < 550) {
+    rainbowDash.y += 1;
+  }
+  if (keys && keys[88] && sonic.y < 550) {
+    sonic.y += 1;
+  }
+  if (keys && keys[39] && rainbowDash.x < 300) {
+    rainbowDash.x += 3;
+  }
+  if (keys && keys[68] && sonic.x < 300) {
+    sonic.x += 3;
+  }
+  if (keys && keys[37] && rainbowDash.x > 20) {
+    rainbowDash.x -= 3;
+  }
+  if (keys && keys[65] && sonic.x > 20) {
+    sonic.x -= 3;
+  }
+  
   // if(rainbowDash.y < canvas.height -50){
   //   rainbowDash.gravity();
   // }
   frames++;
-  board.draw();
+
+  //board.draw();
   rainbowDash.draw(); 
   sonic.draw();
   updateApples();
+  //updateRocks();
   updateCoins();
   updateTrees();
-  updateRocks();
    gameOver(sonic);
   gameOver(rainbowDash);
    checkCollitionSonic();
   checkCollitionRainbowDash();
- 
-  //checkCollition();
-  //  checkCollitionAdd(apples, rainbowDash);
-  //  checkCollitionAdd(coins, sonic);
-  //  checkCollitionTakeOff(apples, sonic);
-  //  checkCollitionTakeOff(coins, rainbowDash);
-  
-  //console.log(getDistance(rainbowDash.x, Apples.y));
   
 }
 start();
@@ -424,9 +466,9 @@ start();
 
 // SOUND EFECTS
 
-let fxCoin = new Audio("/assets/sound/MSN_RING.wav");
-let fxApple = new Audio ("/assets/sound/MSN_FRUIT.wav");
-let fxDamage = new Audio ("/assets/sound/FE_MOVE.wav");
+let fxCoin = new Audio("/Ponic/client/assets/sound/MSN_RING.wav");
+let fxApple = new Audio ("/Ponic/client/assets/sound/MSN_FRUIT.wav");
+let fxDamage = new Audio ("/Ponic/client/assets/sound/FE_MOVE.wav");
 
 
 //UTILITY FUNCTIONS
@@ -474,6 +516,8 @@ function checkCollitionRainbowDash(){
    })
  });
 }
+
+
 
 // function setDate() {
 //   //console.log('Hi');

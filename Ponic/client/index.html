@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="icon" href="/Ponic/client/assets/images/PinClipart.com_rainbow-dash-clipart_2712304.png" type="image" sizes="16x16">
+  <link rel="stylesheet" href="/Ponic/client/css/style.css">
+  <title>Ponic Game</title>
+</head>
+
+<body>
+
+
+
+
+  <div class="container">
+    <div class="row">
+      <div class=" col-3">
+        <img src="/Ponic/client/assets/images/PinClipart.com_rainbow-dash-clipart_2712304.png" alt="ponic-logo" class="logo">
+      </div>
+
+      <div class=" col-6">
+        <div class="clock">
+          <div class="clock-face">
+            <div class="hand hour-hand"></div>
+            <div class="hand min-hand"></div>
+            <div class="hand second-hand"></div>
+          </div>
+        </div>
+        
+      </div>
+
+      <div class="col-3">
+        <img src="/Ponic/client/assets/images/ponic-title-2.png" alt="ponic-title-2" width="120">
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class=" col-3">
+
+        <div class="player">
+         
+          
+          <img  class="logo" src="/Ponic/client/assets/images/ponic-nube-01.png" alt="ponic-nube-01">
+          <h4>Rainbow Dash</h4>
+
+          <div class="score">
+              <div class="life">
+                <img class="icon" src="/Ponic/client/assets/images/Heart_PNG_Image_Free_Download_31683.png" alt="heart">
+                <span id="life">3</span>
+              </div>
+              <div class="points">
+                <img class="icon" src="/Ponic/client/assets/images/ponic-manzana-01.png" alt="ponic-manzana-01">
+                <span id="points">0</span>
+              </div>
+              
+            
+          </div>
+
+          <div class="control">
+            <button data-key="38">👆🏻</button>
+            <button data-key="40">👇🏻</button>
+            <button data-key="37">👈🏻</button>
+            <button data-key="39">👉🏻</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-6">
+        <canvas id="canvas" width="350px" height="500"></canvas>
+
+        <div class='haze'></div>
+        <div class='world'>
+          <div class='road'>
+            <div class='delay-0 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+            <div class='delay-1 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+            <div class='delay-2 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+            <div class='delay-3 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+            <div class='delay-4 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+            <div class='delay-5 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+            <div class='delay-6 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+            <div class='delay-7 segment'>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block teal'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block blue'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block violet'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block red'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block orange'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block yellow'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+              <div class='block green'></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-3">
+        <div class="player2">
+
+          <img class="logo" src="/Ponic/client/assets/images/sonic-logo-500x375.png" alt="sonic-move">
+          <h4>Sonic</h4><br>
+          <div class="score">
+            <div class="life2">
+              <img  class="icon" src="/Ponic/client/assets/images/Heart_PNG_Image_Free_Download_31683.png" alt="ponic-manzana-01">
+              <span id="life2">3</span>
+            </div>
+            <div class="points2">
+              <img class="icon" src="/Ponic/client/assets/images/ponic-ring-002.png" alt="ponic-ring-002">
+              <span id="points2">0</span>
+            </div>
+           
+          </div>
+        </div>
+        <div class="control">
+          <button data-key="38">👆🏻</button>
+          <button data-key="40">👇🏻</button>
+          <button data-key="37">👈🏻</button>
+          <button data-key="39">👉🏻</button>
+        </div>
+      </div>
+
+    </div>
+
+
+  </div>
+        
+     
+<audio src="/Ponic/client/assets/sound/FE_KEYPRESS.wav" data-key="38 40 37 39 87 88 68 65"></audio>
+
+
+
+
+
+
+
+
+<script src="/Ponic/client/client-js/app.js"></script>
+<script src="/Ponic/client/client-js/game.js"></script>
+</body>
+</html>
