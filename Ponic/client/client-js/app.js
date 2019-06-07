@@ -17,6 +17,8 @@ let rocks = [];
 let paint = [];
 let totalPaints = canvas.width/50;
 let keys =[];
+
+let player1, player2;
 // let gameOver = false;
 
 
@@ -151,7 +153,18 @@ class Rainbowdash {
       this.y + this.w > sonic.y
     );
   }
-
+  moveUp(){
+    rainbowDash.y -= 1;
+  }
+  moveDown(){
+    rainbowDash.y += 1;
+  }
+  moveLeft(){
+    rainbowDash.x -= 3;
+  }
+  moveRight(){
+    rainbowDash.x += 3;
+  }
 }
 
 class Sonic {
@@ -212,6 +225,18 @@ class Sonic {
       this.y < rainbowDash.y + rainbowDash.w &&
       this.y + this.w > rainbowDash.y
     );
+  }
+  moveUp() {
+    sonic.y -= 1;
+  }
+  moveDown() {
+    sonic.y += 1;
+  }
+  moveLeft() {
+    sonic.x -= 3;
+  }
+  moveRight() {
+    sonic.x += 3;
   }
 }
 
@@ -419,47 +444,45 @@ function updateGame() {
     currentFrame = ++currentFrame % 2;
   }
 if (keys && keys[38] && rainbowDash.y > 20) {
-    rainbowDash.y -= 1;
+    rainbowDash.moveUp();
   }
   if (keys && keys[87] && sonic.y > 20) {
-    sonic.y -= 1;
+    sonic.moveUp();
   }
   if (keys && keys[40] && rainbowDash.y < 550) {
-    rainbowDash.y += 1;
+  rainbowDash.moveDown();
   }
   if (keys && keys[88] && sonic.y < 550) {
-    sonic.y += 1;
+    sonic.moveDown();
   }
   if (keys && keys[39] && rainbowDash.x < 300) {
-    rainbowDash.x += 3;
+    rainbowDash.moveRight();
   }
   if (keys && keys[68] && sonic.x < 300) {
-    sonic.x += 3;
+    moveRight();
   }
   if (keys && keys[37] && rainbowDash.x > 20) {
-    rainbowDash.x -= 3;
+     rainbowDash.moveLeft();
   }
   if (keys && keys[65] && sonic.x > 20) {
-    sonic.x -= 3;
+    moveLeft();
   }
-  
-  // if(rainbowDash.y < canvas.height -50){
-  //   rainbowDash.gravity();
-  // }
+    
+ 
   frames++;
 
   //board.draw();
   rainbowDash.draw(); 
   sonic.draw();
+  checkCollitionSonic();
+  checkCollitionRainbowDash();
   updateApples();
   //updateRocks();
   updateCoins();
-  updateTrees();
-   gameOver(sonic);
-  gameOver(rainbowDash);
-   checkCollitionSonic();
-  checkCollitionRainbowDash();
+  //updateTrees();
   
+//  gameOver(sonic);
+//  gameOver(rainbowDash)
 }
 start();
 

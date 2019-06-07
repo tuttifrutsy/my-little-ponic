@@ -1,0 +1,67 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,900&display=swap");
+
+@font-face {
+  font-family: 'NiseSegaSonic';
+  src: url(/Ponic/client/assets/fonts/NiseSegaSonic.TTF) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poniville';
+  src: url(/Ponic/client/assets/fonts/PonyvilleMedium0.4.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'Celestia';
+  src: url(/Ponic/client/assets/fonts/CelestiaMediumRedux_alt1.55.ttf) format('truetype');
+}
+
+body {
+  background-color: #252524;
+  color: #f31792;
+  font-family: 'NiseSegaSonic', "Lato", sans-serif;
+  text-align: center;
+}
+
+.jumbotron {
+  width: 80%;
+  height: 300px;
+  margin: auto;
+  background-color: #333332;
+  background-image: url("/ponicNew/images/kisspng-sonic-.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+p {
+  margin-top: 2%;
+  line-height: 1em;
+  font-size: 1em;
+  text-align: center;
+}
+
+.rd{
+  font-family:  'Celestia';
+  font-size: 1.5em;
+}
+
+
+
+.card{
+
+  width: 80%;
+  color: #2349F5;
+  border:4px solid #6C3483;
+  font-family: 'NiseSegaSonic';
+
+  background:#252524;
+  box-sizing: border-box;
+  text-align: center;
+
+}
+
+.btn{
+  margin: 10%;
+  font-family: 'Poniville';
+  background: #13CA29  ;
+   font-family:  'Celestia';
+}

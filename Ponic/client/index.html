@@ -24,6 +24,7 @@
       </div>
 
       <div class=" col-6">
+        <p id="demo"></p>
         <div class="clock">
           <div class="clock-face">
             <div class="hand hour-hand"></div>
@@ -42,6 +43,10 @@
 
     <div class="row">
       <div class=" col-3">
+
+     
+
+       
 
         <div class="player">
          
@@ -63,10 +68,10 @@
           </div>
 
           <div class="control">
-            <button data-key="38">👆🏻</button>
-            <button data-key="40">👇🏻</button>
-            <button data-key="37">👈🏻</button>
-            <button data-key="39">👉🏻</button>
+            <button onclick="rainbowDash.moveUp()" data-key="38">👆🏻</button>
+            <button onclick="rainbowDash.moveDown()"  data-key="40">👇🏻</button>
+            <button onclick="rainbowDash.moveLeft()"  data-key="37">👈🏻</button>
+            <button onclick="rainbowDash.moveRight()"  data-key="39">👉🏻</button>
           </div>
         </div>
       </div>
@@ -547,28 +552,30 @@
       </div>
 
       <div class="col-3">
-        <div class="player2">
 
-          <img class="logo" src="/Ponic/client/assets/images/sonic-logo-500x375.png" alt="sonic-move">
-          <h4>Sonic</h4><br>
-          <div class="score">
-            <div class="life2">
-              <img  class="icon" src="/Ponic/client/assets/images/Heart_PNG_Image_Free_Download_31683.png" alt="ponic-manzana-01">
-              <span id="life2">3</span>
+        
+          <div class="player2">
+
+            <img class="logo" src="/Ponic/client/assets/images/sonic-logo-500x375.png" alt="sonic-move">
+            <h4>Sonic</h4><br>
+            <div class="score">
+              <div class="life2">
+                <img  class="icon" src="/Ponic/client/assets/images/Heart_PNG_Image_Free_Download_31683.png" alt="ponic-manzana-01">
+                <span id="life2">3</span>
+              </div>
+              <div class="points2">
+                <img class="icon" src="/Ponic/client/assets/images/ponic-ring-002.png" alt="ponic-ring-002">
+                <span id="points2">0</span>
+              </div>
+            
             </div>
-            <div class="points2">
-              <img class="icon" src="/Ponic/client/assets/images/ponic-ring-002.png" alt="ponic-ring-002">
-              <span id="points2">0</span>
-            </div>
-           
           </div>
-        </div>
-        <div class="control">
-          <button data-key="38">👆🏻</button>
-          <button data-key="40">👇🏻</button>
-          <button data-key="37">👈🏻</button>
-          <button data-key="39">👉🏻</button>
-        </div>
+          <div class="control">
+            <button onclick="sonic.moveUp()" data-key="38">👆🏻</button>
+            <button onclick="sonic.moveUp()" data-key="40">👇🏻</button>
+            <button onclick="sonic.moveUp()" data-key="37">👈🏻</button>
+            <button onclick="sonic.moveUp()" data-key="39">👉🏻</button>
+          </div>
       </div>
 
     </div>
