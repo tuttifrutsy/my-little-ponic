@@ -17,8 +17,8 @@ let rocks = [];
 let paint = [];
 let totalPaints = canvas.width/50;
 let keys =[];
-
-let player1, player2;
+let timeleft = 60;
+let playerOne, playerTwo;
 // let gameOver = false;
 
 
@@ -88,6 +88,167 @@ class Board {
   }
 }
 
+class PlayerOne {
+  constructor(x, y, w, h, srcx, srcy, srcw, srch) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+
+    this.srcx = srcx;
+    this.srcy = srcy;
+    this.srcw = srcw;
+    this.srch = srch;
+
+    this.img = new Image();
+    this.img.src = "";
+    this.img.onload = this.draw;
+
+    this.gravity = 1;
+
+    this.healt = 3;
+
+    this.life = 1;
+
+    this.counter = 0;
+  }
+  draw() {
+    ctx.drawImage(
+      this.img,
+      currentFrame * (115 / 3),
+      this.srcy,
+      this.srcy,
+      this.srcw,
+      this.srch,
+      this.x,
+      this.y,
+      this.h
+    );
+  }
+  gravity() {
+    this.y += gravity;
+    this.x = 3;
+  }
+  checkAdds(apple) {
+    return (
+      this.x < apple.x + apple.w &&
+      this.x + this.w > apple.x &&
+      this.y < apple.y + apple.w &&
+      this.y + this.w > apple.y
+    );
+  }
+  checkDamage(coin) {
+    return (
+      this.x < coin.x + coin.w &&
+      this.x + this.w > coin.x &&
+      this.y < coin.y + coin.w &&
+      this.y + this.w > coin.y
+    );
+  }
+  checkPlayerTwo() {
+    return (
+      this.x < playerTwo.x + playerTwo.w &&
+      this.x + playerTwo.w > playerTwo.x &&
+      this.y < playerTwo.y + playerTwo.w &&
+      this.y + this.w > playerTwo.y
+    );
+  }
+  moveUp() {
+    playerOne.y -= 1;
+  }
+  moveDown() {
+    playerOne.y += 1;
+  }
+  moveLeft() {
+    playerOne.x -= 3;
+  }
+  moveRight() {
+    playerOne.x += 3;
+  }
+}
+
+
+class PlayerTwo {
+  constructor(x, y, w, h, srcx, srcy, srcw, srch) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+
+    this.srcx = srcx;
+    this.srcy = srcy;
+    this.srcw = srcw;
+    this.srch = srch;
+
+    this.img = new Image();
+    this.img.src = "";
+    this.img.onload = this.draw;
+
+    this.gravity = 1;
+
+    this.healt = 3;
+
+    this.life = 1;
+
+    this.counter = 0;
+  }
+  draw() {
+    ctx.drawImage(
+      this.img,
+      currentFrame * (
+        
+        
+        73 / 2),
+      this.srcy,
+      this.srcy,
+      this.srcw,
+      this.srch,
+      this.x,
+      this.y,
+      this.h
+    );
+  }
+  gravity() {
+    this.y += gravity;
+    this.x = 3;
+  }
+  checkAdds(apple) {
+    return (
+      this.x < apple.x + apple.w &&
+      this.x + this.w > apple.x &&
+      this.y < apple.y + apple.w &&
+      this.y + this.w > apple.y
+    );
+  }
+  checkDamage(coin) {
+    return (
+      this.x < coin.x + coin.w &&
+      this.x + this.w > coin.x &&
+      this.y < coin.y + coin.w &&
+      this.y + this.w > coin.y
+    );
+  }
+  checkPlayerTwo() {
+    return (
+      this.x < playerTwo.x + playerTwo.w &&
+      this.x + playerTwo.w > playerTwo.x &&
+      this.y < playerTwo.y + playerTwo.w &&
+      this.y + this.w > playerTwo.y
+    );
+  }
+  moveUp() {
+    playerOne.y -= 1;
+  }
+  moveDown() {
+    playerOne.y += 1;
+  }
+  moveLeft() {
+    playerOne.x -= 1;
+  }
+  moveRight() {
+    playerOne.x += 1;
+  }
+}
 
 class Rainbowdash {
   constructor(x, y, w, h, srcx, srcy, srcw, srch) {
@@ -432,8 +593,11 @@ function start() {
   interval = setInterval(updateGame, 1000 / 60);
 }
 
-function gameOver(player){
-  if(player.health === 0){
+function gameOver(player1, player2){
+  if(player1.health === 0 && player2.health === 0){
+    clearInterval(interval);
+  }
+  if (timeleft <= 0){
     clearInterval(interval);
   }
 }
@@ -467,22 +631,28 @@ if (keys && keys[38] && rainbowDash.y > 20) {
   if (keys && keys[65] && sonic.x > 20) {
     moveLeft();
   }
+
+  if(rainbowDash.health >= 1 ){
+    rainbowDash.draw();
+    checkCollitionRainbowDash();
     
- 
+  }
+  if(sonic.health >= 1 ){
+    sonic.draw();
+    checkCollitionSonic();
+  }  
   frames++;
 
   //board.draw();
-  rainbowDash.draw(); 
-  sonic.draw();
-  checkCollitionSonic();
-  checkCollitionRainbowDash();
+  // rainbowDash.draw(); 
+  // sonic.draw();
   updateApples();
   //updateRocks();
   updateCoins();
   //updateTrees();
   
-//  gameOver(sonic);
-//  gameOver(rainbowDash)
+ gameOver(sonic, rainbowDash);
+
 }
 start();
 
@@ -541,6 +711,18 @@ function checkCollitionRainbowDash(){
 }
 
 
+
+let downloadTimer = setInterval(function() {
+  document.getElementById("countdown").innerHTML =
+    timeleft;
+    document.getElementById("progressBar").value = 60 - timeleft;
+  timeleft -= 1;
+  if (timeleft <= 0 || sonic.health == 0 || rainbowDash.health == 0)  {
+    clearInterval(downloadTimer);
+    document.getElementById("countdown").innerHTML = "Ha terminado la Carrera";
+  
+  }
+}, 1000);
 
 // function setDate() {
 //   //console.log('Hi');

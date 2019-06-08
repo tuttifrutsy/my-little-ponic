@@ -96,60 +96,15 @@ button{
   text-shadow: 0 0 5px #FAE25A
 }
 
-.playing{
-  transform: scale(1.1);
-  border-color: #FAE25A;
-  box-shadow: 0 0 10px #FAE25A;
-}
-
-.clock{
-  width: 40px;
-  height: 40px;
-  border: 10px solid white;
-  border-radius: 50%;
-  padding: 2px;
-  box-shadow:
-    0 0 0px 4px rgba(0,0,0,0.1),
-    inset 0 0 0 3px #efefef,
-    inset 0 0 10px black,
-    0 0 0 10px rgba(0,0,0,0.2);
-    margin: 10% auto;
-
-}
-
-.clock-face{
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transform: translateY(-3px);
-}
-
-.hand{
-  width: 50%;
-  height: 2px;
-  background: #812E85;
-  position: absolute;
-  top: 50%;
-  transform-origin: 100%;
-  transform: rotate(90deg);
-  transition: all 0.05s;
-  transition-timing-function: cubic-bezier(0.1, 2,7, 0.58, 1);
-
-
-}
-
-
-.card{
-
-  width: 100%;
-  color: #2349F5;
-  border:4px solid #6C3483;
-  font-family: 'NiseSegaSonic';
-
-  background-image: url("/Ponic/client/assets/images/sonicrd.png");
-  box-sizing: border-box;
+#countdown{
   text-align: center;
+  font-family: 'NiseSegaSonic';
+  padding: 10%;
+  font-size: 2em;
+}
 
+#progressBar{
+  width: 100%;
 }
 
 .btn{
