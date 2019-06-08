@@ -73,3 +73,7 @@ p {
   margin: 0%;
   width: 40%;
 }
+
+.modal-dialog.modal-notify.modal-success .modal-header{
+  color: #2349F5;
+}

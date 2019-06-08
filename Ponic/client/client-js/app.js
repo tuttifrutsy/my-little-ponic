@@ -623,13 +623,13 @@ if (keys && keys[38] && rainbowDash.y > 20) {
     rainbowDash.moveRight();
   }
   if (keys && keys[68] && sonic.x < 300) {
-    moveRight();
+    sonic.moveRight();
   }
   if (keys && keys[37] && rainbowDash.x > 20) {
      rainbowDash.moveLeft();
   }
   if (keys && keys[65] && sonic.x > 20) {
-    moveLeft();
+    sonic.moveLeft();
   }
 
   if(rainbowDash.health >= 1 ){
@@ -717,7 +717,7 @@ let downloadTimer = setInterval(function() {
     timeleft;
     document.getElementById("progressBar").value = 60 - timeleft;
   timeleft -= 1;
-  if (timeleft <= 0 || sonic.health == 0 || rainbowDash.health == 0)  {
+  if (timeleft <= 0 || sonic.health == 0 && rainbowDash.health == 0)  {
     clearInterval(downloadTimer);
     document.getElementById("countdown").innerHTML = "Ha terminado la Carrera";
   
@@ -741,3 +741,5 @@ let downloadTimer = setInterval(function() {
 //   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
 // }
  
+
+$("#myModal").modal("toggle");
