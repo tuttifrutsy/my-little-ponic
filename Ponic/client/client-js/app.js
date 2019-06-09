@@ -4,7 +4,7 @@ let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
 canvas.width = 350;
-canvas.height = 350;
+canvas.height = 420;
 
 //VARIABLES 
 
@@ -13,9 +13,7 @@ let currentFrame = 0;
 let apples = [];
 let trees = [];
 let coins =[];
-let rocks = [];
-let paint = [];
-let totalPaints = canvas.width/50;
+let bricks = [];
 let keys =[];
 let timeleft = 60;
 let playerOne, playerTwo;
@@ -35,34 +33,8 @@ let playerOne, playerTwo;
  })
 
 
-// window.addEventListener("keydown", e => {
 
-//  
-  // if (e.keyCode === 38 && rainbowDash.y > 20) {
-  //   rainbowDash.y -= 1;
-  // }
-  // if (e.keyCode === 87 && sonic.y > 20) {
-  //   sonic.y -= 1;
-  // }
-  // if (e.keyCode === 40 && rainbowDash.y < 550) {
-  //   rainbowDash.y += 1;
-  // }
-  // if (e.keyCode === 88 && sonic.y < 550) {
-  //   sonic.y += 1;
-  // }
-  // if (e.keyCode === 39 && rainbowDash.x < 300) {
-  //   rainbowDash.x += 7;
-  // }
-  // if (e.keyCode === 68 && sonic.x < 300) {
-  //   sonic.x += 7;
-  // }
-  // if (e.keyCode === 37 && rainbowDash.x > 20) {
-  //   rainbowDash.x -= 7;
-  // }
-  // if (e.keyCode === 65 && sonic.x > 20) {
-  //   sonic.x -= 7;
-  // }
-//});
+
 
 
 
@@ -70,7 +42,37 @@ let playerOne, playerTwo;
 // OBJECTS
 
 
+// class Bricks {
+//   constructor(x, y, w, h) {
+//     this.x = x;
+//     this.y = y;
+//     this.w = w;
+//     this.h = h;
+//   }
+//   draw() {
+//     ctx.fillStyle = generateRandomColor();
+//     //this.x -= 2;
+//     this.y += 1;
+//     ctx.fillRect(this.x, this.y, this.w, this.h);
+//   }
+// }
 
+
+class Bricks {
+  constructor(x, y, w, h, color) {
+    this.x = x;
+    this.y = y;
+    this.w = w;
+    this.h = h;
+    this.color = color;
+  }
+  draw() {
+    ctx.fillStyle = this.color;
+    //this.x -= 2;
+    this.y += 5;
+    ctx.fillRect(this.x, this.y, this.w, this.h);
+  }
+}
 
 class Board {
   constructor() {
@@ -515,9 +517,43 @@ const hourHand = document.querySelector(".hour-hand");
 
 // ANIMATION LOOP
 
+function generateRoad(){
+  if(frames % 7 === 0){
+    bricks.push(new Bricks(280, 0, 30, 30, "#F06292"));
+    bricks.push(new Bricks(248, 0, 30, 30, "#BA68C8"));
+    bricks.push(new Bricks(216, 0, 30, 30, "#4FC3F7"));
+    bricks.push(new Bricks(184, 0, 30, 30, "#9CCC65")); 
+    bricks.push(new Bricks(152, 0, 30, 30, "#FFF176")); 
+    bricks.push(new Bricks(120, 0, 30, 30, "#FFA726")); 
+    bricks.push(new Bricks(88, 0, 30, 30, "#FF7043"));
+    bricks.push(new Bricks(56, 0, 30, 30, "#A1887F"));   
+  }
+}
 
+function drawBricks(){
+  bricks.forEach(function(brick, i){
+   brick.draw();
+  })
 
+  }
 
+//  function generateRoad() {
+//    if (frames % 12 === 0) {
+//      bricks.push(new Bricks(280, 0, 10, 10));
+//      bricks.push(new Bricks(269, 0, 10, 10));
+//      bricks.push(new Bricks(258, 0, 10, 10));
+//      bricks.push(new Bricks(247, 0, 10, 10));
+//      bricks.push(new Bricks(236, 0, 10, 10));
+//      bricks.push(new Bricks(225, 0, 10, 10));
+    
+//    }
+//  }
+
+//  function drawBricks() {
+//    bricks.forEach(function(brick, i) {
+//      brick.draw();
+//    });
+//  }
 
 
 
@@ -603,7 +639,9 @@ function gameOver(player1, player2){
 }
 
 function updateGame() {
+    
   ctx.clearRect(0, 0, canvas.width, canvas.height);
+ 
   if (frames % 8 === 0) {
     currentFrame = ++currentFrame % 2;
   }
@@ -616,7 +654,7 @@ if (keys && keys[38] && rainbowDash.y > 20) {
   if (keys && keys[40] && rainbowDash.y < 550) {
   rainbowDash.moveDown();
   }
-  if (keys && keys[88] && sonic.y < 550) {
+  if (keys && keys[83] && sonic.y < 550) {
     sonic.moveDown();
   }
   if (keys && keys[39] && rainbowDash.x < 300) {
@@ -631,6 +669,8 @@ if (keys && keys[38] && rainbowDash.y > 20) {
   if (keys && keys[65] && sonic.x > 20) {
     sonic.moveLeft();
   }
+  generateRoad();
+  drawBricks();
 
   if(rainbowDash.health >= 1 ){
     rainbowDash.draw();
@@ -643,14 +683,9 @@ if (keys && keys[38] && rainbowDash.y > 20) {
   }  
   frames++;
 
-  //board.draw();
-  // rainbowDash.draw(); 
-  // sonic.draw();
   updateApples();
-  //updateRocks();
-  updateCoins();
-  //updateTrees();
-  
+ 
+updateCoins();
  gameOver(sonic, rainbowDash);
 
 }
@@ -724,22 +759,10 @@ let downloadTimer = setInterval(function() {
   }
 }, 1000);
 
-// function setDate() {
-//   //console.log('Hi');
-//   const now = new Date();
-//   const seconds = now.getSeconds();
-//   const secondsDegrees = (seconds / 60) * 360 + 90;
-//   secondHand.style.transform = `rotate(${secondsDegrees}deg)`;
-//   //console.log(seconds);
 
-//   const mins = now.getMinutes();
-//   const minsDegrees = (mins / 60) * 360 + 90;
-//   minsHand.style.transform = `rotate(${minsDegrees}deg)`;
+function generateRandomColor() {
+  return "#" + Math.floor(Math.random() * 16777215).toString(16);
+}
 
-//   const hour = now.getMinutes();
-//   const hourDegrees = (mins / 12) * 360 + 90;
-//   hourHand.style.transform = `rotate(${hourDegrees}deg)`;
-// }
  
 
-$("#myModal").modal("toggle");
