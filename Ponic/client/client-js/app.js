@@ -4,18 +4,30 @@ let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
 canvas.width = 350;
-canvas.height = 420;
+canvas.height = 600;
 
 //VARIABLES 
 
 let frames = 0;
 let currentFrame = 0;
 let apples = [];
-let trees = [];
 let coins =[];
 let bricks = [];
 let keys =[];
 let timeleft = 60;
+var counter = 0;
+var color = "";
+let ponnys = [
+  "/Ponic/client/assets/images/poni_001.png",
+  "/Ponic/client/assets/images/poni_002.png",
+  "/Ponic/client/assets/imagesg",
+  "/Ponic/client/assets/images/poni_001.png",
+  "/Ponic/client/assets/images/poni_001.png",
+  "/Ponic/client/assets/images/poni_001.png",
+  "/Ponic/client/assets/images/poni_001.png",
+  "/Ponic/client/assets/images/poni_001.png",
+  "/Ponic/client/assets/images/poni_001.png"
+];
 let playerOne, playerTwo;
 // let gameOver = false;
 
@@ -32,11 +44,7 @@ let playerOne, playerTwo;
    keys[e.keyCode] = (e.type == "keydown");
  })
 
-
-
-
-
-
+window.alert("Oh, no¡ Sonic está en Equestria 🤔 o RainbowDash está en South Island. Descubrelo al final de la carrera¡¡");
 
 
 // OBJECTS
@@ -69,7 +77,7 @@ class Bricks {
   draw() {
     ctx.fillStyle = this.color;
     //this.x -= 2;
-    this.y += 5;
+    this.y +=4;
     ctx.fillRect(this.x, this.y, this.w, this.h);
   }
 }
@@ -450,66 +458,17 @@ class Coin {
   }
 }
 
-class Rocks {
-  constructor(x, y, w, h) {
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.speedY = 1;
-
-    this.img = new Image();
-    this.img.src = "/Ponic/client/assets/images/ponic-piedras-02.png";
-    this.img.onload = this.draw();
-  }
-  draw() {
-    if (this.y < canvas.height) {
-      this.y += this.speedY;
-    }
-    ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
-  }
-}
-
-class Trees {
-  constructor(x, y, w, h, isTop){
-    this.x = x;
-    this.y = y;
-    this.w = w;
-    this.h = h;
-    this.gravity = 3;
-    
-    this.img = new Image();
-    this.img.src = isTop? '/Ponic/client/assets/images/tree1.png' : '/Ponic/client/assets/images/tree2.png';
-    this.img.onload = this.draw();
-  }
-  draw(){
-    if (this.y < canvas.height) {
-      this.y += this.gravity;
-    }
-   ctx.drawImage(
-     this.img, 
-     this.x, 
-     this.y, 
-     this.w, 
-     this.h);
-  }
-}
 
 // IMPLEMENTATION
 
 let board = new Board();
-let rainbowDash = new Rainbowdash(110, 270, 115 / 3, 45, 0, 0, 115 / 3, 42);
-let sonic = new Sonic(200, 270, 73/2, 45, 0, 0 , 73/2, 45);
+let rainbowDash = new Rainbowdash(110, 350, 115 / 3, 45, 0, 0, 115 / 3, 42);
+let sonic = new Sonic(200, 350, 73/2, 45, 0, 0 , 73/2, 45);
 let rainbowDashLife = document.querySelector('#life');
 let rainbowDashPoints = document.querySelector('#points');
 let sonicLife = document.querySelector('#life2');
 let sonicPoints = document.querySelector('#points2');
 
-// let apple = new Apples(50, 50, 20, 20);
-
-const secondHand = document.querySelector(".second-hand");
-const minsHand = document.querySelector(".min-hand");
-const hourHand = document.querySelector(".hour-hand");
 
 
 // setInterval(setDate, 1000);
@@ -518,15 +477,40 @@ const hourHand = document.querySelector(".hour-hand");
 // ANIMATION LOOP
 
 function generateRoad(){
-  if(frames % 7 === 0){
-    bricks.push(new Bricks(280, 0, 30, 30, "#F06292"));
-    bricks.push(new Bricks(248, 0, 30, 30, "#BA68C8"));
-    bricks.push(new Bricks(216, 0, 30, 30, "#4FC3F7"));
-    bricks.push(new Bricks(184, 0, 30, 30, "#9CCC65")); 
-    bricks.push(new Bricks(152, 0, 30, 30, "#FFF176")); 
-    bricks.push(new Bricks(120, 0, 30, 30, "#FFA726")); 
-    bricks.push(new Bricks(88, 0, 30, 30, "#FF7043"));
-    bricks.push(new Bricks(56, 0, 30, 30, "#A1887F"));   
+  if(frames % 6 === 0){
+ 
+    if (counter == 0) {
+      color = "#F06292";
+    } else if (counter  == 1) {
+      color = "#BA68C8";
+    } else if (counter == 2) {
+      color = "#4FC3F7";
+    } else if (counter == 3) {
+      color = "#00FF33";
+    } else if (counter  == 4) {
+      color = "#FFEE58";
+    } else if (counter == 5) {
+      color = "#FFA726";
+    } else if (counter == 6) {
+      color = "#FF7043";
+    
+    } else {
+      counter = -1;
+    }
+    
+    counter++;
+   
+    bricks.push(new Bricks(280, 0, 20, 20, color)); 
+    bricks.push(new Bricks(258, 0, 20, 20, color));
+    bricks.push(new Bricks(236, 0, 20, 20, color));
+    bricks.push(new Bricks(214, 0, 20, 20, color)); 
+    bricks.push(new Bricks(192, 0, 20, 20, color)); 
+    bricks.push(new Bricks(170, 0, 20, 20, color)); 
+    bricks.push(new Bricks(148,  0, 20, 20, color));
+    bricks.push(new Bricks(126,  0, 20, 20, color));  
+    bricks.push(new Bricks(104, 0, 20, 20, color)); 
+    bricks.push(new Bricks(82, 0, 20, 20, color)); 
+    bricks.push(new Bricks(60, 0, 20, 20, color));   
   }
 }
 
@@ -565,7 +549,7 @@ function updateCoins() {
   
   if (frames % 50 === 0) {
     let x = randomRange(100, 200);
-    let y = randomRange( 50, canvas.height);
+    let y = randomRange( 0, canvas.height);
     coins.push(new Coin( x, y, 20, 20, true ));
   }
  }
@@ -578,7 +562,7 @@ function updateApples() {
   
   if (frames % 50 === 0) {
     let x = randomRange(100, 200);
-    let y = randomRange( 50, canvas.height);
+    let y = randomRange( 0, canvas.height);
     apples.push(new Apples( x, y, 20, 20, true ));
   }
   //console.log(apples);
@@ -716,7 +700,7 @@ function checkCollitionSonic() {
         apples.splice(ai, 1);
         sonic.health--;
         sonicLife.textContent = sonic.health;
-        console.log(sonic.health, 'Sonic');
+        //console.log(sonic.health, 'Sonic');
         fxDamage.play();
       }
     });
@@ -730,7 +714,7 @@ function checkCollitionRainbowDash(){
       apples.splice(ai,1);
       rainbowDash.counter ++;
       rainbowDashPoints.textContent = rainbowDash.counter;
-      console.log(rainbowDash.counter);
+      //console.log(rainbowDash.counter);
        fxApple.play();
    }
    coins.forEach((coin, ci)=>{
@@ -738,7 +722,7 @@ function checkCollitionRainbowDash(){
        coins.splice(ci,1);
        rainbowDash.health --;
        rainbowDashLife.textContent = rainbowDash.health;
-       console.log(rainbowDash.health);
+       //console.log(rainbowDash.health);
        fxDamage.play();
      }
    })
@@ -760,9 +744,9 @@ let downloadTimer = setInterval(function() {
 }, 1000);
 
 
-function generateRandomColor() {
-  return "#" + Math.floor(Math.random() * 16777215).toString(16);
-}
+// function generateRandomColor() {
+//   return "#" + Math.floor(Math.random() * 16777215).toString(16);
+// }
 
  
 

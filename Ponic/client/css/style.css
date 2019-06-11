@@ -54,12 +54,18 @@ body{
   color:#2349F5;
   font-weight: bold;
 }
+
+.scene{
+  display: inline-block;
+  perspective: 500px;
+}
 #canvas{
 
-  
-  margin: auto;
+padding: 5%;
   border-radius: 15px;
-  position: absolute;
+  /* border: solid 2px red; */
+  transform: rotateX(50deg);
+  /* transform: rotate(20deg); */
 } 
 
 h2{
