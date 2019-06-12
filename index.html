@@ -19,98 +19,188 @@
 
 <body>
 
+  <nav>
+    <ul>
+      <li><a 
+        class="btn-floating" 
+        type="button" 
+        role="button" 
+        href="/../Ponic/client/index.html">
+        <i
+        class="fas fa-play-circle"></i></a></li>
+      <li><a 
+        class="btn-floating" 
+        type="button" 
+        role="button" 
+        data-toggle="modal" 
+        data-target="#centralModalSuccess">
+        <i
+         class="fas fa-gamepad"></i></a></li>
+      <li><a 
+        class="btn-floating" 
+        type="button" 
+        role="button" 
+        data-toggle="modal" 
+        data-target="#centralModalDanger">
+        <i
+         class="fas fa-cogs"></i></a></li>
+      <li><a 
+        class="btn-floating" 
+        type="button" 
+        role="button">
+        <i 
+        class="fas fa-info"></i></a></li>
+    </ul>
+  </nav>
   
+<!-- NO BORRAR¡¡ <button onclick="character('ponic')">Ponic</button>
+  <button onclick="character('otro')">Otro</button> -->
   
-<div class="container">
-  <!-- <div class="row">
-    <div class="col-sm">
 
-      <div class="card" style="width: 14rem;">
-        <img src="/Ponic/client/assets/images/sonicrd.png" class="card-img-top" alt="sonicrd">
-        <div class="card-body">
-          <h5 class="card-title">Selecciona tu personaje</h5>
-          <a onclick="sonic.draw()" class="btn btn-primary">Sonic</a>
-          <a onclick="rainbowDash.draw()" class="btn btn-primary">Rainbow Dash</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-sm">
-      <div>
-        <h1 class="display-4"> Oh, no!</h1>
-    
-      </div>
-    </div>
-    <div class="col-sm">
+<div 
+class="modal fade modal-full-height modal-right" 
+id="centralModalSuccess" 
+tabindex="-1" 
+role="dialog"
+  aria-labelledby="myModalLabel" 
+  aria-hidden="true">
+  <div 
+  class="modal-dialog modal-notify modal-success" 
+  role="document">
 
-      <div class="card" style="width: 14rem;">
-        <img src="/Ponic/client/assets/images/sonicrd.png" class="card-img-top" alt="sonicrd">
-        <div class="card-body">
-          <h5 class="card-title">Selecciona tu personaje</h5>
-          <a onclick="sonic.draw()" class="btn btn-primary">Sonic</a>
-          <a onclick="rainbowDash.draw()" class="btn btn-primary">Rainbow Dash</a>
+    <div 
+    class="modal-content">
+      <div 
+      class="modal-header">
+        <p 
+        class="heading lead">Controles</p>
+      </div>
+      <div 
+      class="modal-body">
+        <div 
+        class="text-center">
+          <p>Utiliza las teclas</p>
+          <img 
+          src="/Ponic/client/assets/images/controles.png" 
+          alt="controles">
         </div>
+        <a 
+        type="button" 
+        class="btn btn-outline-success waves-effect" 
+        data-dismiss="modal">
+        OK</a>
       </div>
     </div>
   </div>
-  <div class="row">
-    <div class="col">
-      <p class="sc">Sonic esta en Equestria ! 🤯</p>
-      <p class="rd">🤔 O RAINBOW DASH ESTA EN SOUTH ISLAND ?</p>
-      <p>Descubre donde se encuentran al final de la carrera.</p> -->
-      <button type="button" class="btn" data-toggle="modal" data-target="#centralModalInfo"></button> 
-       
-    </div>
-   <!-- </div>
-</div> -->
-
-
-<div class="modal fade" id="centralModalInfo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
-  aria-hidden="true">
-  <div class="modal-dialog modal-notify modal-info" role="document">
-     <div class="modal-content">
-     
-      <div class="modal-header">
-        <p class="heading lead">Info</p>
-
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true" class="white-text">&times;</span>
-        </button>
+</div>
+<div 
+class="modal fade" 
+id="centralModalDanger" 
+tabindex="-1" 
+role="dialog" 
+aria-labelledby="myModalLabel"
+aria-hidden="true">
+  <div 
+  class="modal-dialog modal-notify modal-danger" 
+  role="document">
+    <div 
+    class="modal-content">
+      <div 
+      class="modal-header">
+        <p 
+        class="heading lead">
+        Elige tu corredor</p>
       </div>
-
-    
-      <div class="modal-body">
-        <div class="text-center">
+      <div 
+      class="modal-body">
+        <div>
+          <i 
+          class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
+          <p>Corredor 1</p>
+          <a 
+          onclick="characterF('poni1')"
+          type="button" 
+          class="runner one btn waves-effect" 
+          ></a>
+          <a 
+          onclick="characterF('poni2')"
+          type="button" 
+          class="runner two btn waves-effect">
+          </a>
+          <a 
+          onclick="characterF('poni3')"
+          type="button" 
+          class="runner three btn waves-effect">
+          </a>
+          <a 
+          onclick="characterF('poni4')"
+          type="button" 
+          class="runner four btn waves-effect">
+         </a>
+          <a 
+          onclick="characterF('poni5')"
+          type="button" 
+          class="runner five btn waves-effect"> 
+          
+        </a>
+          <a 
+          type="button" 
+          class="runner six btn waves-effect" 
+          onclick="characterF('poni6')">
+        </a>
+          <a 
+          type="button" 
+          class="runner seven btn waves-effect" 
+           
+          onclick="characterF('poni7')">
+        </a>
+          <a 
+          type="button" 
+          class="runner eight btn waves-effect" 
+           
+          onclick="characterF('poni8')">
+          </a>
+        </div>
+        <div>
           <i class="fas fa-check fa-4x mb-3 animated rotateIn"></i>
-         
-          <p> Corredor Uno: Utiliza las teclas A para moverte a la izquierda, W para avanzar, D moverte a la derecha y S para ir
-            hacia abajo </p><br>
-          <p> Correrdor Dos: Utiliza lad teclas ⬅️ para moverte a la izquierda ➡️ para moverte a la derecha ⬆️ para ir hacia
-            arriba y ⬇️ para ir hacia abajo</p>
+          <p>Corredor 2</p>
+          <a 
+          type="button" 
+          class="runner nine btn waves-effect" 
+          
+          onclick="character('')">
+          </a>
+          <a 
+          type="button" 
+          class="runner ten btn waves-effect" 
+   
+          onclick="character('')">
+          </a>
         </div>
       </div>
-
+        <a 
+        type="button" 
+        class="exit btn btn-danger"
+        data-dismiss="modal">
+        OK
+        <i 
+        class="far fa-gem ml-1 text-white"></i></a>
     
-      <div class="modal-footer justify-content-center">
-        <a type="button" class="btn btn-primary" href="/../Ponic/client/index.html">Go ¡<i class="far fa-gem ml-1 text-white"></i></a>
-        <a type="button" class="btn btn-outline-primary waves-effect" data-dismiss="modal">No, Gracias</a>
-      </div>
     </div>
- 
   </div>
 </div>
 
- <script>window.alert("Oh, no¡ Sonic está en Equestria 🤔 o RainbowDash está en South Island. Descubrelo al final de la carrera¡¡");</script>
 
-  <!-- SCRIPTS -->
+    
 
  
+<!-- <script>window.alert("Oh, no¡ Sonic está en Equestria 🤔 o RainbowDash está en South Island. Descubrelo al final de la carrera¡¡");</script> -->
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
-  <!-- Bootstrap tooltips -->
   <script type="text/javascript" src="js/popper.min.js"></script>
-  <!-- Bootstrap core JavaScript -->
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
-  <!-- MDB core JavaScript -->
   <script type="text/javascript" src="js/mdb.min.js"></script>
+  <script src="/Ponic/client/client-js/main.js"></script>
+  <!-- <script src="/Ponic/client/client-js/app.js"></script> -->
 </body>
 
 </html>
