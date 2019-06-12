@@ -17,10 +17,12 @@
   padding: 0;
 }
 
-body{
+body, html{
+  height: 100%;
   font-family: 'Varela Round', sans-serif;
   color: white;
   background-image: url(/Ponic/client/assets/images/mlp_wallpaper_rainbowdash20.jpg);
+  background-position: center;
   background-repeat: no-repeat;
   background-color: black;
   background-size: cover; 

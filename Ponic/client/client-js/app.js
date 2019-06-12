@@ -18,8 +18,15 @@
   let bricks = [];
   let keys = [];
   let timeleft = 60;
-  var counter = 0;
-  var color = "";
+  let counter = 0;
+  let color = "";
+  let backgrounds = [
+    '/Ponic/client/assets/images/bg-01.jpg',
+    '/Ponic/client/assets/images/bg-02.png',
+    '/Ponic/client/assets/images/bg-03.jpeg',
+    '/Ponic/client/assets/images/bg-04.png',
+    '/Ponic/client/assets/images/bg-05.jpg'
+  ];
  
  
   // let gameOver = false;
@@ -35,9 +42,7 @@
     keys[e.keyCode] = e.type == "keydown";
   });
 
-  // window.alert(
-  //   "Oh, no¡ Sonic está en Equestria 🤔 o RainbowDash está en South Island. Descubrelo al final de la carrera¡¡"
-  // );
+  
 
   // OBJECTS
 
@@ -93,7 +98,7 @@
 
   let dataCharacter = JSON.parse(localStorage.getItem("character"));
 
-  console.log( dataCharacter) ;
+  // console.log( dataCharacter) ;
    
   
 
@@ -291,12 +296,6 @@
 
   // IMPLEMENTATION
 
-
-  // function myGame( dataCharacterOne ) {
-  //   const {x,y,w,h,srcx,srcy,srcw,srch} = dataCharacterOne 
-   
-
-    // let board = new Board();
     let playerOne = new PlayerOne(110, 350, 115 / 3, 45, 0, 0, 115 / 3, 42);
     let playerTwo = new PlayerTwo(200, 350, 73 / 2, 45, 0, 0, 73 / 2, 45);
     let playerOneLife = document.querySelector("#life");
@@ -304,7 +303,7 @@
     let playerTwoLife = document.querySelector("#life2");
     let playerTwoPoints = document.querySelector("#points2");
 
-    // setInterval(setDate, 1000);
+
 
     // ANIMATION LOOP
 
@@ -412,6 +411,7 @@
       }
       if (timeleft <= 0) {
         clearInterval(interval);
+      
       }
     }
 
@@ -525,9 +525,9 @@
       namePlayerOne.textContent = dataCharacter.name;
       document.getElementById("logoRunner1").src = dataCharacter.logo;
       
-     let namePlayerTwo = document.querySelector("#runnersTwo");
-     document.getElementById("logoRunners2").src = dataCharacter.logo;
-     namePlayerTwo.textContent = dataCharacter.name;
+    //  let namePlayerTwo = document.querySelector("#runnersTwo");
+    //  document.getElementById("logoRunners2").src = dataCharacter.logo;
+    //  namePlayerTwo.textContent = dataCharacter.name;
 
 
     
@@ -539,44 +539,18 @@
       timeleft -= 1;
       if (timeleft <= 0 || (playerTwo.health == 0 && playerOne.health == 0)) {
         clearInterval(downloadTimer);
-        document.getElementById("countdown").innerHTML =
-          "Ha terminado la Carrera";
+        document.getElementById("countdown").innerHTML = "Ha terminado la Carrera";
+        document.body.style.backgroundImage ="url('" + backgrounds[randomBackground] +  "')";
+        
       }
     }, 1000);
-
+    
     // function generateRandomColor() {
-    //   return "#" + Math.floor(Math.random() * 16777215).toString(16);
-    // }
-//   }
-
-// let opcCharacter = localStorage.getItem("character");
-
-
-// let dataCharacter = {
-//   x:110,
-//   y:350,
-//   w:115 / 3,
-//   h: 45,
-//   srcx: 0, 
-//   srcy:0, 
-//   srcw:115 / 3, 
-//   srch: 42
-// }
-
-// if( opcCharacter == 'ponic' ){
-//   dataCharacter = {
-//     x: 110,
-//     y: 350,
-//     w: 115 / 3,
-//     h: 45,
-//     srcx: 0,
-//     srcy: 0,
-//     srcw: 115 / 3,
-//     srch: 42
-//   };
-// }else if( opcCharacter == 'otro'){
-
-// }
+      //   return "#" + Math.floor(Math.random() * 16777215).toString(16);
+      // }
+      //   }
+      
+     
+        let randomBackground = Math.floor(Math.random() * 5) + 0 ;
 
 
-// myGame(dataCharacter);

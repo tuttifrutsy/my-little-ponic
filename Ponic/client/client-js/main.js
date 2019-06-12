@@ -36,7 +36,7 @@ function characterF(c) {
       logo: "/Ponic/client/assets/images/ponic-pie-01.png"
     };
     localStorage.setItem("character", JSON.stringify(character));
-  } else if (c ==" poni6") {
+  } else if (c =="poni6") {
     character = {
       name: "Apple Jack",
       image1: "/Ponic/client/assets/images/poni_006.png",

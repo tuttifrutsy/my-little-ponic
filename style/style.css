@@ -15,14 +15,14 @@
   src: url(/Ponic/client/assets/fonts/CelestiaMediumRedux_alt1.55.ttf) format('truetype');
 }
 
-body{
+body, html{ 
  width: 100%;
  background: url(/Ponic/client/assets/images/ponic-titulo-01.png);
+
  background-repeat: no-repeat;
  background-size: cover;
  background-color: #252524;
  font-family: 'NiseSegaSonic', "Lato", sans-serif;
-
 }
  
 nav{
