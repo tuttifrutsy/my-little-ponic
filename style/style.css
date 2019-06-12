@@ -15,55 +15,56 @@
   src: url(/Ponic/client/assets/fonts/CelestiaMediumRedux_alt1.55.ttf) format('truetype');
 }
 
-body {
-  background: #252524;
-  color: white;
-  font-family: 'NiseSegaSonic', "Lato", sans-serif;
-  text-align: center;
+body{
+ width: 100%;
+ background: url(/Ponic/client/assets/images/ponic-titulo-01.png);
+ background-repeat: no-repeat;
+ background-size: cover;
+ background-color: #252524;
+ font-family: 'NiseSegaSonic', "Lato", sans-serif;
+
 }
-
-.container{
-  background: url(/Ponic/client/assets/images/ponic-titulo-01.png);
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 100%;
-  height: 650px;
-}
-
-
-p {
-  margin-top: 2%;
-  line-height: 1em;
-  font-size: 1em;
-  text-align: center;
-}
-
-.rd{
-  font-family:  'Celestia';
-  font-size: 1.5em;
-}
-
-.col{
-  text-align: center;
-}
-
-.card{
-
-  width: 80%;
-  color: #2349F5;
  
-  font-family: 'NiseSegaSonic';
-  margin-top: 25%;
-  background:#252524;
-  box-sizing: border-box;
+nav{
+  width: 100%;
+  
+}
+
+
+ul li{
+  list-style-type: none;
+}
+nav ul li {
+  display: inline;
+}
+
+nav ul li a i {
+  color: #F7FBF7 ;
+  font-size: 1em;
+ 
+}
+
+.btn-floating{
+  width: 5%;
+  border-radius: 50%;
+  /* border: solid 5px #FFFF00; */
+  background: #0000CC;
   text-align: center;
-  margin: auto;
+  padding: 1.5%;
+  margin-top: 2%;
+  margin-left: 18%;
+  transition:all 0.375s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.btn-floating:hover{
+width: 9%;
+font-size: 3em;
+background-color: #33FF66 ;
+cursor: pointer;
 }
 
 .btn{
-  position: absolute;
-  top: 86%;
-  left: 28%;
+  left: 20%;
   background: none;
   width: 40%;
   height: 10%;
@@ -73,8 +74,23 @@ p {
   margin: 0%;
   width: 40%;
 }
+.opc{
+  background-color: red;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: row
+}
 
 
 .modal-dialog.modal-notify.modal-success .modal-header{
   color: #2349F5;
+}
+
+.text-center img{
+  width: 100%;;
+}
+
+.runner{
+  border-radius: 50%;
 }

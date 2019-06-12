@@ -1,10 +1,19 @@
 //INITIAL SETUP
 
+let opcPlayer = ''
+
+function character(c){
+  alert(c)
+}
+
+
+
+
 let canvas = document.getElementById("canvas");
 let ctx = canvas.getContext("2d");
 
 canvas.width = 350;
-canvas.height = 600;
+canvas.height = 400;
 
 //VARIABLES 
 
@@ -17,19 +26,10 @@ let keys =[];
 let timeleft = 60;
 var counter = 0;
 var color = "";
-let ponnys = [
-  "/Ponic/client/assets/images/poni_001.png",
-  "/Ponic/client/assets/images/poni_002.png",
-  "/Ponic/client/assets/imagesg",
-  "/Ponic/client/assets/images/poni_001.png",
-  "/Ponic/client/assets/images/poni_001.png",
-  "/Ponic/client/assets/images/poni_001.png",
-  "/Ponic/client/assets/images/poni_001.png",
-  "/Ponic/client/assets/images/poni_001.png",
-  "/Ponic/client/assets/images/poni_001.png"
-];
+let ponnys = [rainbowDash, fluttershy, celestia, luna, pinkiePie, appleJack, twilight, rarity];
 let playerOne, playerTwo;
 // let gameOver = false;
+
 
 
 // EVENT LISTENERS
@@ -44,7 +44,7 @@ let playerOne, playerTwo;
    keys[e.keyCode] = (e.type == "keydown");
  })
 
-window.alert("Oh, no¡ Sonic está en Equestria 🤔 o RainbowDash está en South Island. Descubrelo al final de la carrera¡¡");
+
 
 
 // OBJECTS
@@ -99,7 +99,7 @@ class Board {
 }
 
 class PlayerOne {
-  constructor(x, y, w, h, srcx, srcy, srcw, srch) {
+  constructor(x, y, w, h, srcx, srcy, srcw, srch, name, img, logo) {
     this.x = x;
     this.y = y;
     this.w = w;
@@ -111,8 +111,11 @@ class PlayerOne {
     this.srch = srch;
 
     this.img = new Image();
-    this.img.src = "";
+    this.img.src = img;
     this.img.onload = this.draw;
+
+    this.name = name;
+    this.logo = logo;
 
     this.gravity = 1;
 
@@ -121,6 +124,8 @@ class PlayerOne {
     this.life = 1;
 
     this.counter = 0;
+
+    this.jump = false;
   }
   draw() {
     ctx.drawImage(
@@ -174,6 +179,9 @@ class PlayerOne {
   }
   moveRight() {
     playerOne.x += 3;
+  }
+  jump(){
+
   }
 }
 
@@ -462,8 +470,15 @@ class Coin {
 // IMPLEMENTATION
 
 let board = new Board();
+
+
+let playerTwox = new PlayerTwo(200, 350, 73 / 2, 45, 0, 0, 73 / 2, 45);
 let rainbowDash = new Rainbowdash(110, 350, 115 / 3, 45, 0, 0, 115 / 3, 42);
 let sonic = new Sonic(200, 350, 73/2, 45, 0, 0 , 73/2, 45);
+let playerOneLife = document.querySelector('#life');
+let playerTwoLife = document.querySelector('#life2');
+let playerOnePoints = document.querySelector('#points');
+let playerTwoPoints = document.querySelector('#points2');
 let rainbowDashLife = document.querySelector('#life');
 let rainbowDashPoints = document.querySelector('#points');
 let sonicLife = document.querySelector('#life2');
@@ -471,7 +486,7 @@ let sonicPoints = document.querySelector('#points2');
 
 
 
-// setInterval(setDate, 1000);
+
 
 
 // ANIMATION LOOP
@@ -548,7 +563,7 @@ function updateCoins() {
   }
   
   if (frames % 50 === 0) {
-    let x = randomRange(100, 200);
+    let x = randomRange(60, 280);
     let y = randomRange( 0, canvas.height);
     coins.push(new Coin( x, y, 20, 20, true ));
   }
@@ -561,51 +576,16 @@ function updateApples() {
   }
   
   if (frames % 50 === 0) {
-    let x = randomRange(100, 200);
+    let x = randomRange(60, 280);
     let y = randomRange( 0, canvas.height);
     apples.push(new Apples( x, y, 20, 20, true ));
   }
   //console.log(apples);
 }
 
-function updateRocks() {
-  for (let i = 0; i < rocks.length; i++) {
-    //apples[i].x += -1;
-    rocks[i].draw();
-  }
-
-  if (frames % 90 === 0) {
-    let x = randomRange(150, 200);
-    let y = randomRange(100, canvas.height);
-    rocks.push(new Rocks(x, y, 20, 20, true));
-  }
-}
-
-function updateTrees(){
-
-  for(let i = 0; i < trees.length; i ++){
-    
-    trees[i].draw();
-  }
-  if (frames % 120 === 0 ){
-   
-
-    let height = randomRange(50, 90);
-    let widht = randomRange( 30, 60);
-
-    let x = randomRange(0, 10);
-    let y = randomRange(100, 200);
-
-    trees.push(new Trees(x, y, widht, height, true ));
-    trees.push(new Trees(340,80, widht,height,true));
-   
-  }
-}
 
 
-function randomRange(min, max) {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-} 
+
 
 // PRINCIPALES
 
@@ -623,20 +603,20 @@ function gameOver(player1, player2){
 }
 
 function updateGame() {
-    
+  
   ctx.clearRect(0, 0, canvas.width, canvas.height);
- 
+  
   if (frames % 8 === 0) {
     currentFrame = ++currentFrame % 2;
   }
-if (keys && keys[38] && rainbowDash.y > 20) {
+  if (keys && keys[38] && rainbowDash.y > 20) {
     rainbowDash.moveUp();
   }
   if (keys && keys[87] && sonic.y > 20) {
     sonic.moveUp();
   }
   if (keys && keys[40] && rainbowDash.y < 550) {
-  rainbowDash.moveDown();
+    rainbowDash.moveDown();
   }
   if (keys && keys[83] && sonic.y < 550) {
     sonic.moveDown();
@@ -648,30 +628,30 @@ if (keys && keys[38] && rainbowDash.y > 20) {
     sonic.moveRight();
   }
   if (keys && keys[37] && rainbowDash.x > 20) {
-     rainbowDash.moveLeft();
+    rainbowDash.moveLeft();
   }
   if (keys && keys[65] && sonic.x > 20) {
     sonic.moveLeft();
   }
   generateRoad();
   drawBricks();
-
+  
   if(rainbowDash.health >= 1 ){
-    rainbowDash.draw();
+    playerOne.draw();
     checkCollitionRainbowDash();
     
   }
   if(sonic.health >= 1 ){
-    sonic.draw();
+    playerTwo.draw();
     checkCollitionSonic();
   }  
   frames++;
-
+  
   updateApples();
- 
-updateCoins();
- gameOver(sonic, rainbowDash);
-
+  
+  updateCoins();
+  gameOver(sonic, rainbowDash);
+  
 }
 start();
 
@@ -695,7 +675,7 @@ function checkCollitionSonic() {
       //console.log(sonic.counter, 'Sonic');
       fxCoin.play();
     }
-     apples.forEach((apple, ai) => {
+    apples.forEach((apple, ai) => {
       if (sonic.checkDamage(apple)) {
         apples.splice(ai, 1);
         sonic.health--;
@@ -715,38 +695,42 @@ function checkCollitionRainbowDash(){
       rainbowDash.counter ++;
       rainbowDashPoints.textContent = rainbowDash.counter;
       //console.log(rainbowDash.counter);
-       fxApple.play();
-   }
-   coins.forEach((coin, ci)=>{
-     if (rainbowDash.checkDamage(coin)) {
-       coins.splice(ci,1);
-       rainbowDash.health --;
-       rainbowDashLife.textContent = rainbowDash.health;
-       //console.log(rainbowDash.health);
-       fxDamage.play();
-     }
-   })
- });
+      fxApple.play();
+    }
+    coins.forEach((coin, ci)=>{
+      if (rainbowDash.checkDamage(coin)) {
+        coins.splice(ci,1);
+        rainbowDash.health --;
+        rainbowDashLife.textContent = rainbowDash.health;
+        //console.log(rainbowDash.health);
+        fxDamage.play();
+      }
+    })
+  });
 }
 
+function selectPlayer(){
 
+
+}
 
 let downloadTimer = setInterval(function() {
   document.getElementById("countdown").innerHTML =
-    timeleft;
-    document.getElementById("progressBar").value = 60 - timeleft;
+  timeleft;
+  document.getElementById("progressBar").value = 60 - timeleft;
   timeleft -= 1;
   if (timeleft <= 0 || sonic.health == 0 && rainbowDash.health == 0)  {
     clearInterval(downloadTimer);
     document.getElementById("countdown").innerHTML = "Ha terminado la Carrera";
-  
+    
   }
 }, 1000);
 
 
 // function generateRandomColor() {
-//   return "#" + Math.floor(Math.random() * 16777215).toString(16);
-// }
-
- 
-
+  //   return "#" + Math.floor(Math.random() * 16777215).toString(16);
+  // }
+   
+  function randomRange(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
+  } 
