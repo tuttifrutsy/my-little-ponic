@@ -102,7 +102,7 @@
   //LocalStorage
 
   let dataCharacter = JSON.parse(localStorage.getItem("character"));
-  // let dataCharacterSonic = JSON.parse(localStorage.getItem("sonics"));
+  let dataCharacterSonic = JSON.parse(localStorage.getItem("sonics"));
 
   // console.log( dataCharacter) ;
    
@@ -212,7 +212,7 @@
       this.h = h;
 
       this.img = new Image();
-      this.img.src = "/Ponic/client/assets/images/sonic_002.png";
+      this.img.src = dataCharacterSonic.image1;
       this.img.onload = this.draw();
 
       this.health = 3;
@@ -487,30 +487,29 @@
         currentFrame = ++currentFrame % 2;
       }
       if (keys && keys[87] && playerOne.y > 20) {
-        // playerOne.moveUp();
+        playerOne.moveUp();
         playerOne.speed =-1;
       }
       if (keys && keys[38] && playerTwo.y > 20) {
         playerTwo.moveUp();
       }
       if (keys && keys[83] && playerOne.y < 550) {
-        // playerOne.moveDown();
-        playerOne.speed =1;
-        
+       playerOne.moveDown();
+
       }
       if (keys && keys[40] && playerTwo.y < 550) {
         playerTwo.moveDown();
       }
       if (keys && keys[68] && playerOne.x < 300) {
-        // playerOne.moveRight();
-        playerOne.moveAngle = 1;
+        playerOne.moveRight();
+       
       }
       if (keys && keys[39] && playerTwo.x < 300) {
         playerTwo.moveRight();
       }
       if (keys && keys[65] && playerOne.x > 20) {
-        // playerOne.moveLeft();
-        playerOne.moveAngle = -1;
+        playerOne.moveLeft();
+        
       }
       if (keys && keys[37] && playerTwo.x > 20) {
         playerTwo.moveLeft();

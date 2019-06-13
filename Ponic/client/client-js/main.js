@@ -1,5 +1,6 @@
 character = "";
 sonics = "";
+
 function characterF(c) {
   if (c == "poni1") {
     character = {
@@ -84,20 +85,20 @@ function characterF(c) {
   }
 }
 
-// function characterSonic(c){
-//   if (c == "sonic1") {
-//     sonics = {
-//       name: "Sonic",
-//       image1: "/Ponic/client/assets/images/sonic_002.png",
-//       logo: "/Ponic/client/assets/images/sonic-logo-500x375.png"
-//     };
-//     localStorage.setItem("character", JSON.stringify(character));
-//   } else if (c == "sonic2") {
-//     sonics = {
-//       name: "Sonic",
-//       image1: "/Ponic/client/assets/images/sonic_004.png",
-//       logo: "/Ponic/client/assets/images/sonic-logo-500x375.png"
-//     };
-//     localStorage.setItem("character", JSON.stringify(character));
-//   }
-// }
+function characterSonic(c){
+  if (c == "sonic1") {
+    sonics = {
+      name: "Sonic",
+      image1: "/Ponic/client/assets/images/sonic_002.png",
+      logo: "/Ponic/client/assets/images/sonic-logo-500x375.png"
+    };
+    localStorage.setItem("sonics", JSON.stringify(sonics));
+  } else if (c == "sonic2") {
+    sonics = {
+      name: "Sonic",
+      image1: "/Ponic/client/assets/images/sonic_004.png",
+      logo: "/Ponic/client/assets/images/sonic-logo-500x375.png"
+    };
+    localStorage.setItem("sonics", JSON.stringify(sonics));
+  }
+}
