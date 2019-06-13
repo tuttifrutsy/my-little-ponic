@@ -32,13 +32,11 @@ body, html{
 .logo{
   width: 40%;
   margin: 10% auto;
-
 }
 
 .icon{
  width: 20%;
  margin: 5%;
-
 }
  
 .player{
@@ -48,8 +46,7 @@ body, html{
 .player2{
   font-family: 'NiseSegaSonic';
   margin-top: 20%;
-  margin-left: 10%;
-  
+  margin-left: 10%; 
 }
 
 .player2 h4{
@@ -62,12 +59,12 @@ body, html{
   perspective: 500px;
 }
 #canvas{
-
-padding: 5%;
+  padding: 5%;
   border-radius: 15px;
   /* border: solid 2px red; */
   transform: rotateX(50deg);
   /* transform: rotate(20deg); */
+  visibility: visible;
 } 
 
 h2{
@@ -119,4 +116,69 @@ button{
   margin: 2%;
   font-family: 'Poniville';
   background: #13CA29  ;
+ }
+
+#runnerWin{
+  visibility: hidden;
+}
+
+ .bg-img-sonic{
+   width: 100%;
+   background-image: url("/Ponic/client/assets/images/sonic-win.png");
+   filter: blur(8px);
+   height: 100%;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+ }
+
+ .bg-text-sonic{
+   font-family: 'NiseSegaSonic';
+   background-color: rgb(0, 0, 0);
+   background-color: rgba(0, 0, 0, 0.4);
+   color: white;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 2;
+   width: 60%;
+   padding: 20%;
+   text-align: center;
+ 
+ }
+
+ .bg-img-poni{
+   width: 100%;
+   background-image: url("/Ponic/client/assets/images/rd-win.png");
+   filter: blur(8px);
+   height: 100%;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+  
+ }
+
+ .bg-text-poni{
+   font-family: 'Poniville';
+   background-color: rgb(0, 0, 0);
+   background-color: rgba(0, 0, 0, 0.4);
+   color: white;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 2;
+   width: 60%;
+   padding: 20%;
+   text-align: center;
+  
+ }
+
+ #runnerWinTwo{
+   visibility: hidden;
+ }
+
+ #empate{
+   visibility: hidden;
  }

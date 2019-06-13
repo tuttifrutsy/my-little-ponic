@@ -23,10 +23,15 @@
   let backgrounds = [
     '/Ponic/client/assets/images/bg-01.jpg',
     '/Ponic/client/assets/images/bg-02.png',
-    '/Ponic/client/assets/images/bg-03.jpeg',
+    '/Ponic/client/assets/images/bg-03.jpg',
     '/Ponic/client/assets/images/bg-04.png',
-    '/Ponic/client/assets/images/bg-05.jpg'
+
+    '/Ponic/client/assets/images/bg-06.png',
+    '/Ponic/client/assets/images/bg-07.jpg'
   ];
+  let obstacles = [];
+  let winner;
+
  
  
   // let gameOver = false;
@@ -97,6 +102,7 @@
   //LocalStorage
 
   let dataCharacter = JSON.parse(localStorage.getItem("character"));
+  // let dataCharacterSonic = JSON.parse(localStorage.getItem("sonics"));
 
   // console.log( dataCharacter) ;
    
@@ -129,7 +135,7 @@
     draw() {
       ctx.drawImage(
         this.img,
-        currentFrame * (115 / 3),
+        currentFrame * (144 / 3),
         this.srcy,
         this.srcw,
         this.srch,
@@ -167,17 +173,29 @@
         this.y + this.w > playerTwo.y
       );
     }
+    checkObstacles(obstacle) {
+      return (
+        this.x < obstacle.x + obstacle.w &&
+        this.x + this.w > obstacle.x &&
+        this.y < obstacle.y + obstacle.w &&
+        this.y + this.w > obstacle.y
+      );
+      }
     moveUp() {
-      playerOne.y -= 1;
+      playerOne.y -= 0.3;
+      
     }
     moveDown() {
-      playerOne.y += 1;
+      playerOne.y += 0.3;
+      this.img.src = dataCharacter.image2;
     }
     moveLeft() {
       playerOne.x -= 3;
+      this.img.src = dataCharacter.image4;
     }
     moveRight() {
       playerOne.x += 3;
+      this.img.src = dataCharacter.image3;
     }
   }
 
@@ -200,7 +218,10 @@
       this.health = 3;
       this.life = 1;
 
+      this.angle = 0;
+      this.speed = 0 ;
       this.counter = 0;
+      this.moveAngle = 0;
     }
 
     draw() {
@@ -240,17 +261,31 @@
         this.y + this.w > playerOne.y
       );
     }
+    checkObstacles(obstacle) {
+      return (
+        this.x < obstacle.x + obstacle.w &&
+        this.x + this.w > obstacle.x &&
+        this.y < obstacle.y + obstacle.w &&
+        this.y + this.w > obstacle.y
+      );
+    }
     moveUp() {
-      sonic.y -= 1;
+      playerTwo.y -= 0.3;
     }
     moveDown() {
-      sonic.y += 1;
+      playerTwo.y += 0.3;
     }
     moveLeft() {
-      sonic.x -= 3;
+      playerTwo.x -= 3;
     }
     moveRight() {
-      sonic.x += 3;
+      playerTwo.x += 3;
+    }
+    jump() {
+      this.angle += this.moveAngle * Marth.Pi / 180;
+      this.x += this.speed * Math.sin(this.angle);
+      this.y -=this.speed * Math.cos(this.angle);
+      playerTwo.y += 5;
     }
   }
 
@@ -294,9 +329,29 @@
     }
   }
 
+
+  class Obstacle {
+    constructor(x, y, w, h) {
+      this.x = x;
+      this.y = y;
+      this.w = w;
+      this.h = h;
+      this.speedY = 1;
+
+      this.img = new Image();
+      this.img.src = "/Ponic/client/assets/images/hole.png";
+      this.img.onload = this.draw();
+    }
+    draw() {
+      if (this.y < canvas.height) {
+        this.y += this.speedY;
+      }
+      ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+  }
+}
   // IMPLEMENTATION
 
-    let playerOne = new PlayerOne(110, 350, 115 / 3, 45, 0, 0, 115 / 3, 42);
+    let playerOne = new PlayerOne(110, 350, 144 / 3, 48, 0, 0, 144 / 3, 48);
     let playerTwo = new PlayerTwo(200, 350, 73 / 2, 45, 0, 0, 73 / 2, 45);
     let playerOneLife = document.querySelector("#life");
     let playerOnePoints = document.querySelector("#points");
@@ -308,7 +363,7 @@
     // ANIMATION LOOP
 
     function generateRoad() {
-      if (frames % 6 === 0) {
+      if (frames % 8 === 0) {
         if (counter == 0) {
           color = "#F06292";
         } else if (counter == 1) {
@@ -340,6 +395,8 @@
         bricks.push(new Bricks(104, 0, 20, 20, color));
         bricks.push(new Bricks(82, 0, 20, 20, color));
         bricks.push(new Bricks(60, 0, 20, 20, color));
+
+       
       }
     }
 
@@ -374,7 +431,7 @@
       }
 
       if (frames % 50 === 0) {
-        let x = randomRange(100, 200);
+        let x = randomRange(60, 250);
         let y = randomRange(0, canvas.height);
         coins.push(new Coin(x, y, 20, 20, true));
       }
@@ -387,96 +444,109 @@
       }
 
       if (frames % 50 === 0) {
-        let x = randomRange(100, 200);
+        let x = randomRange(60, 250);
         let y = randomRange(0, canvas.height);
         apples.push(new Apples(x, y, 20, 20, true));
       }
       //console.log(apples);
     }
 
-   
-    function randomRange(min, max) {
-      return Math.floor(Math.random() * (max - min + 1) + min);
+    function generateObstacles() {
+      for (let i = 0; i < obstacles.length; i++) {
+        obstacles[i].draw();
+      }
+
+      if (frames % 90 === 0) {
+        let x = randomRange(60, 280);
+        let y = randomRange(0, canvas.height);
+        obstacles.push(new Obstacle(x, y, 30, 30, true));
+      }
     }
-
-    // PRINCIPALES
-
+    
+    // PRINCIPAL
+    
     function start() {
       interval = setInterval(updateGame, 1000 / 60);
     }
-
+    
     function gameOver(player1, player2) {
       if (player1.health === 0 && player2.health === 0) {
         clearInterval(interval);
+        winnerIs();
       }
       if (timeleft <= 0) {
         clearInterval(interval);
-      
+        
       }
     }
-
+    
     function updateGame() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+      
       if (frames % 8 === 0) {
         currentFrame = ++currentFrame % 2;
       }
-      if (keys && keys[38] && playerOne.y > 20) {
-        playerOne.moveUp();
+      if (keys && keys[87] && playerOne.y > 20) {
+        // playerOne.moveUp();
+        playerOne.speed =-1;
       }
-      if (keys && keys[87] && playerTwo.y > 20) {
+      if (keys && keys[38] && playerTwo.y > 20) {
         playerTwo.moveUp();
       }
-      if (keys && keys[40] && playerOne.y < 550) {
-        playerTwo.moveDown();
-      }
       if (keys && keys[83] && playerOne.y < 550) {
+        // playerOne.moveDown();
+        playerOne.speed =1;
+        
+      }
+      if (keys && keys[40] && playerTwo.y < 550) {
         playerTwo.moveDown();
       }
-      if (keys && keys[39] && playerOne.x < 300) {
-        playerOne.moveRight();
+      if (keys && keys[68] && playerOne.x < 300) {
+        // playerOne.moveRight();
+        playerOne.moveAngle = 1;
       }
-      if (keys && keys[68] && playerTwo.x < 300) {
+      if (keys && keys[39] && playerTwo.x < 300) {
         playerTwo.moveRight();
       }
-      if (keys && keys[37] && playerOne.x > 20) {
-        playerOne.moveLeft();
+      if (keys && keys[65] && playerOne.x > 20) {
+        // playerOne.moveLeft();
+        playerOne.moveAngle = -1;
       }
-      if (keys && keys[65] && playerTwo.x > 20) {
+      if (keys && keys[37] && playerTwo.x > 20) {
         playerTwo.moveLeft();
       }
-      
       generateRoad();
       drawBricks();
-
+      
       if (playerOne.health >= 1) {
         playerOne.draw();
         checkCollitionPlayerOne();
         
-
+        
       }
       if (playerTwo.health >= 1) {
         playerTwo.draw();
         checkCollitionPlayerTwo();
       }
       frames++;
-
+      
       updateApples();
-
+      generateObstacles();
       updateCoins();
       gameOver(playerOne, playerTwo);
-  
+      
     }
     start();
-
+    
     // SOUND EFECTS
-
+    
     let fxCoin = new Audio("/Ponic/client/assets/sound/MSN_RING.wav");
     let fxApple = new Audio("/Ponic/client/assets/sound/MSN_FRUIT.wav");
     let fxDamage = new Audio("/Ponic/client/assets/sound/FE_MOVE.wav");
-
+    let fxDead = new Audio("/Ponic/client/assets/sound/pacman_death.wav");
+    
     //UTILITY FUNCTIONS
-
+    
     function checkCollitionPlayerTwo() {
       coins.forEach((coin, ci) => {
         if (playerTwo.checkAdds(coin)) {
@@ -494,10 +564,18 @@
             //console.log(sonic.health, 'Sonic');
             fxDamage.play();
           }
+          obstacles.forEach((obstacle, oi) => {
+            if (playerTwo.checkObstacles(obstacle)) {
+              obstacles.splice(oi, 1);
+              playerTwo.health = 0;
+              playerTwoLife.textContent = playerTwo.health;
+              fxDead.play();
+            }
+          });
         });
       });
     }
-
+    
     function checkCollitionPlayerOne() {
       apples.forEach((apple, ai) => {
         if (playerOne.checkAdds(apple)) {
@@ -515,24 +593,49 @@
             //console.log(rainbowDash.health);
             fxDamage.play();
           }
+          obstacles.forEach((obstacle, oi)=>{
+            if(playerOne.checkObstacles(obstacle)){
+              obstacles.splice(oi, 1);
+              playerOne.health = 0;
+              playerOneLife.textContent = playerOne.health;
+              fxDead.play();
+            }
+          })
         });
       });
     }
 
+
+    
+    function winnerIs(){
+      if(playerOne.counter > playerTwo.counter){
+        winner = playerOne;
+        document.getElementById("runnerWin").style.visibility='visible';
+        document.getElementById("canvas").style.visibility = "hidden";
+        //console.log(winner);
+      }
+      else if(playerTwo.counter > playerOne.counter){
+        winner = playerTwo;
+        document.getElementById("runnerWinTwo").style.visibility= 'visible';
+        document.getElementById("canvas").style.visibility = "hidden";
+        //console.log(winner);
+      }
+      else if (playerOne.counter == playerTwo.counter){
+        document.getElementById("empate").style.visibility ="visible";
+        document.getElementById("canvas").style.visibility = "hidden";
+      }
+    }
     
     
-      let namePlayerOne = document.querySelector("#runnerOne");
-      namePlayerOne.textContent = dataCharacter.name;
-      document.getElementById("logoRunner1").src = dataCharacter.logo;
-      
+    let namePlayerOne = document.querySelector("#runnerOne");
+    namePlayerOne.textContent = dataCharacter.name;
+    document.getElementById("logoRunner1").src = dataCharacter.logo;
+    
     //  let namePlayerTwo = document.querySelector("#runnersTwo");
     //  document.getElementById("logoRunners2").src = dataCharacter.logo;
     //  namePlayerTwo.textContent = dataCharacter.name;
-
-
     
-
-
+    
     let downloadTimer = setInterval(function() {
       document.getElementById("countdown").innerHTML = timeleft;
       document.getElementById("progressBar").value = 60 - timeleft;
@@ -540,7 +643,7 @@
       if (timeleft <= 0 || (playerTwo.health == 0 && playerOne.health == 0)) {
         clearInterval(downloadTimer);
         document.getElementById("countdown").innerHTML = "Ha terminado la Carrera";
-        document.body.style.backgroundImage ="url('" + backgrounds[randomBackground] +  "')";
+        document.body.style.backgroundImage ="url('" + backgrounds[randomBackground] + "')";
         
       }
     }, 1000);
@@ -550,7 +653,11 @@
       // }
       //   }
       
+      
+      let randomBackground = Math.floor(Math.random() * 5) + 0 ;
+          
+      function randomRange(min, max) {
+        return Math.floor(Math.random() * (max - min + 1) + min);
+      }
+
      
-        let randomBackground = Math.floor(Math.random() * 5) + 0 ;
-
-
