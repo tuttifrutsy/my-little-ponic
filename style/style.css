@@ -15,14 +15,14 @@
   src: url(/Ponic/client/assets/fonts/CelestiaMediumRedux_alt1.55.ttf) format('truetype');
 }
 
-body{
+body, html{ 
  width: 100%;
  background: url(/Ponic/client/assets/images/ponic-titulo-01.png);
+
  background-repeat: no-repeat;
  background-size: cover;
  background-color: #252524;
  font-family: 'NiseSegaSonic', "Lato", sans-serif;
-
 }
  
 nav{
@@ -92,5 +92,58 @@ cursor: pointer;
 }
 
 .runner{
+  display: block;
+  width:140px;
+  height: 140px;
   border-radius: 50%;
+ 
+}
+
+.btn-outline-danger {
+  border:none;
+}
+
+.exit{
+  margin: 10%;
+  padding: 2%;
+}
+
+.one{
+  background: url('/Ponic/client/assets/images/Personajes-mi-pequeño-poni-rainbow-dash.jpg');
+}
+
+.two{
+  background: url('/Ponic/client/assets/images/Personajes-mi-pequeño-pony-fluttershy.jpg');
+}
+
+.three{
+  background: url('/Ponic/client/assets/images/Personajes-mi-pequeño-poni-celestia.jpg');
+}
+
+.four{
+  background: url('/Ponic/client/assets/images/Personajes-mi-pequeño-poni-princesa-luna.jpg');
+}
+
+.five{
+  background: url('/Ponic/client/assets/images/Personajes-mi-pequeño-poni-pinkie-pie.jpg');
+}
+
+.six{
+  background: url('/Ponic/client/assets/images/Personajes-mi-pequeño-poni-Applejack.jpg');
+}
+
+.seven{
+  background: url('/Ponic/client/assets/images/Twilight-Sparkle-Personajes-mi-pequeño-poni.jpg');
+}
+
+.eight{
+  background: url('/Ponic/client/assets/images/Personajes-mi-pequeño-poni-rarity.jpg');
+}
+
+.nine{
+ background: url('/Ponic/client/assets/images/sonic-profile.jpeg');
+}
+
+.ten{
+ background: url('/Ponic/client/assets/images/sonic-red.jpeg');
 }
