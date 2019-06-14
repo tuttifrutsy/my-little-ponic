@@ -19,7 +19,7 @@
   let keys = [];
   let timeleft = 60;
   let counter = 0;
-  let color = "";
+  let color ="";
   let backgrounds = [
     '/Ponic/client/assets/images/bg-01.jpg',
     '/Ponic/client/assets/images/bg-02.png',
@@ -48,6 +48,22 @@
   });
 
   
+
+class Board {
+  constructor() {
+    this.x = 0;
+    this.y = 0;
+    this.w = canvas.width;
+    this.h = canvas.height;
+    this.img = new Image();
+    this.img.src = "/Ponic/client/assets/images/stars-bg.jpg";
+    this.img.onload = this.draw();
+  }
+
+  draw() {
+    ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
+  }
+}
 
   // OBJECTS
 
@@ -82,21 +98,7 @@
     }
   }
 
-  // class Board {
-  //   constructor() {
-  //     this.x = 0;
-  //     this.y = 0;
-  //     this.w = canvas.width + 50;
-  //     this.h = canvas.height + 100;
-  //     this.img = new Image();
-  //     this.img.src = "/Ponic/client/assets/images/ponic-background-02.png";
-  //     this.img.onload = this.draw();
-  //   }
-
-  //   draw() {
-  //     ctx.drawImage(this.img, this.x, this.y, this.w, this.h);
-  //   }
-  // }
+  
 
 
   //LocalStorage
@@ -180,22 +182,28 @@
         this.y < obstacle.y + obstacle.w &&
         this.y + this.w > obstacle.y
       );
-      }
+    }
     moveUp() {
       playerOne.y -= 0.3;
-      
+      this.img.src = dataCharacter.image1;
     }
     moveDown() {
       playerOne.y += 0.3;
       this.img.src = dataCharacter.image2;
     }
     moveLeft() {
-      playerOne.x -= 3;
+      playerOne.x -= 1.5;
       this.img.src = dataCharacter.image4;
     }
     moveRight() {
-      playerOne.x += 3;
+      playerOne.x += 1.5;
       this.img.src = dataCharacter.image3;
+    }
+    stopMove() {
+      
+    }
+    iAmDead(){
+      this.img.src = "/Ponic/client/assets/images/ghost-blue.png"
     }
   }
 
@@ -258,7 +266,7 @@
         this.x < playerOne.x + playerOne.w &&
         this.x + this.w > playerOne.x &&
         this.y < playerOne.y + playerOne.w &&
-        this.y + this.w > playerOne.y
+        this.y + this.w > playerOne.ystopMove()
       );
     }
     checkObstacles(obstacle) {
@@ -276,16 +284,20 @@
       playerTwo.y += 0.3;
     }
     moveLeft() {
-      playerTwo.x -= 3;
+      playerTwo.x -= 1.5;
     }
     moveRight() {
-      playerTwo.x += 3;
+      playerTwo.x += 1.5;
     }
     jump() {
-      this.angle += this.moveAngle * Marth.Pi / 180;
-      this.x += this.speed * Math.sin(this.angle);
-      this.y -=this.speed * Math.cos(this.angle);
-      playerTwo.y += 5;
+      
+    }
+    stopMove(){
+      playerOne.x = 0;
+      playerOne.y = 0;
+    }
+    iAmDead(){
+      this.img.src ="/Ponic/client/assets/images/ghost-red.png"
     }
   }
 
@@ -350,7 +362,7 @@
   }
 }
   // IMPLEMENTATION
-
+    
     let playerOne = new PlayerOne(110, 350, 144 / 3, 48, 0, 0, 144 / 3, 48);
     let playerTwo = new PlayerTwo(200, 350, 73 / 2, 45, 0, 0, 73 / 2, 45);
     let playerOneLife = document.querySelector("#life");
@@ -483,14 +495,14 @@
     function updateGame() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       
-      if (frames % 8 === 0) {
+      if (frames % 12 === 0) {
         currentFrame = ++currentFrame % 2;
       }
-      if (keys && keys[87] && playerOne.y > 20) {
+      if (keys && keys[87] && playerOne.y > 50) {
         playerOne.moveUp();
-        playerOne.speed =-1;
+       
       }
-      if (keys && keys[38] && playerTwo.y > 20) {
+      if (keys && keys[38] && playerTwo.y > 50) {
         playerTwo.moveUp();
       }
       if (keys && keys[83] && playerOne.y < 550) {
@@ -500,18 +512,18 @@
       if (keys && keys[40] && playerTwo.y < 550) {
         playerTwo.moveDown();
       }
-      if (keys && keys[68] && playerOne.x < 300) {
+      if (keys && keys[68] && playerOne.x < 280) {
         playerOne.moveRight();
        
       }
-      if (keys && keys[39] && playerTwo.x < 300) {
+      if (keys && keys[39] && playerTwo.x < 280) {
         playerTwo.moveRight();
       }
-      if (keys && keys[65] && playerOne.x > 20) {
+      if (keys && keys[65] && playerOne.x > 50) {
         playerOne.moveLeft();
         
       }
-      if (keys && keys[37] && playerTwo.x > 20) {
+      if (keys && keys[37] && playerTwo.x > 50) {
         playerTwo.moveLeft();
       }
       generateRoad();
@@ -568,6 +580,7 @@
               obstacles.splice(oi, 1);
               playerTwo.health = 0;
               playerTwoLife.textContent = playerTwo.health;
+              playerTwo.iAmDead();
               fxDead.play();
             }
           });
@@ -597,8 +610,10 @@
               obstacles.splice(oi, 1);
               playerOne.health = 0;
               playerOneLife.textContent = playerOne.health;
+              
               fxDead.play();
             }
+           
           })
         });
       });
