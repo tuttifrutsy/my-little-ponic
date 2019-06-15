@@ -1,0 +1,182 @@
+
+@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
+
+
+@font-face {
+  font-family: 'NiseSegaSonic';
+  src: url(/Ponic/client/assets/fonts/NiseSegaSonic.TTF) format('truetype');
+}
+
+@font-face {
+  font-family: 'Poniville';
+  src: url(/Ponic/client/assets/fonts/PonyvilleMedium0.4.ttf) format('truetype');
+}
+
+*{
+  margin: 0;
+  padding: 0;
+}
+
+body, html{
+  height: 100%;
+  font-family: 'Varela Round', sans-serif;
+  color: white;
+  background-image: url(/Ponic/client/assets/images/mlp_wallpaper_rainbowdash20.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-size: cover; 
+  
+} 
+
+.logo{
+  width: 40%;
+  margin: 10% auto;
+}
+
+.icon{
+ width: 20%;
+ margin: 5%;
+}
+ 
+.player{
+  font-family: 'Poniville';
+}
+
+.player2{
+  font-family: 'NiseSegaSonic';
+  margin-top: 20%;
+  margin-left: 10%; 
+}
+
+.player2 h4{
+  color:#2349F5;
+  font-weight: bold;
+}
+
+.scene{
+  display: inline-block;
+  perspective: 500px;
+}
+#canvas{
+  padding: 5%;
+  border-radius: 15px;
+  transform: rotateX(50deg);
+  /* transform: rotate(20deg); */
+  visibility: visible;
+} 
+
+h2{
+  padding:20px 10px 20px 10px ;
+  text-align: center;
+  font-size: 1.5em;
+  font-weight: bold;
+  text-shadow: 3px 3px 3px #1E88E5;
+  color: #6C3483;
+  line-height: 2em;
+}
+
+h4{
+  color: #EDF632;
+  margin: 10%;
+}
+
+
+
+.control {
+  margin: 10%;
+}
+
+
+
+button{
+  margin: 5% auto;
+  padding: 5px;
+  width: 40%;
+  border-radius: 15%;
+  border:2px solid #2349F5;
+  transition: all 0.07s;
+  background: rgba(0,0,0,0.1);
+  text-shadow: 0 0 5px #FAE25A
+}
+
+#countdown{
+  text-align: center;
+  font-family: 'NiseSegaSonic';
+  padding: 10%;
+  font-size: 2em;
+}
+
+#progressBar{
+  width: 100%;
+}
+
+.btn{
+  margin: 2%;
+  font-family: 'Poniville';
+  background: #13CA29  ;
+ }
+
+#runnerWin{
+  visibility: hidden;
+}
+
+ .bg-img-sonic{
+   width: 100%;
+   background-image: url("/Ponic/client/assets/images/sonic-win.png");
+   filter: blur(8px);
+   height: 100%;
+   background-position: center;
+   background-repeat: no-repeat;
+   background-size: cover;
+ }
+
+ .bg-text-sonic{
+   font-family: 'NiseSegaSonic';
+   background-image: url("/Ponic/client/assets/images/sonic-win.png");
+   background-size: cover;
+   background-color: rgb(0, 0, 0);
+   background-color: rgba(0, 0, 0, 0.4);
+   color: white;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 2;
+   width: 60%;
+   padding: 20%;
+   text-align: center;
+ 
+ }
+
+ 
+
+ .bg-text-poni{
+   font-family: 'Poniville';
+   background-image: url("/Ponic/client/assets/images/rd-win.png");
+   background-size: cover;
+   /* background-color: rgb(0, 0, 0); * */
+   color: white;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   z-index: 2;
+   width: 60%;
+   padding: 20%;
+   text-align: center;
+  
+ }
+
+ #runnerWinTwo{
+   visibility: hidden;
+ }
+
+ #empate{
+   visibility: hidden;
+  
+ }
+
+ .bg-text-poni h2{
+   padding: 0%;
+ }

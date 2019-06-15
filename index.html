@@ -2,98 +2,110 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
   <link rel="icon" href="../Ponic/client/assets/images/PinClipart.com_rainbow-dash-clipart_2712304.png" type="image"
-  sizes="16x16">
+    sizes="16x16">
   <link rel="stylesheet" href="/css/style.css">
- 
+
   <title>Ponic</title>
-  
+
 
 </head>
 
 <body>
- 
+
   <div id="controls" class="overlay">
-    <a onclick="closeNav()" class="closebtn">&times;</a>
     <div class="overlay-content">
-      <a href="#">About</a>
-      <a href="#">Services</a>
-      <a href="#">Clients</a>
-      <a href="#">Contact</a>
+      <a href="#">Avanzar</a>
+      <div class="movimientos">
+        <div class="ejemplo">
+          <h3>Corredor Uno</h3>
+          <p>W</p>
+        </div>
+        <div class="ejemplo2">
+          <h3>Corredor Dos</h3>
+          <p>↑</p>
+        </div>
+      </div>
+      <a href="#">Retroceder</a>
+      <div class="movimientos">
+        <div class="ejemplo">
+          <h3>Corredor Uno</h3>
+          <p>S</p>
+        </div>
+        <div class="ejemplo2">
+          <h3>Corredor Dos</h3>
+          <p>↓</p>
+        </div>
+      </div>
+      <a href="#">Izquierda</a>
+      <div class="movimientos">
+        <div class="ejemplo">
+          <h3>Corredor Uno</h3>
+          <p>A</p>
+        </div>
+        <div class="ejemplo2">
+          <h3>Corredor Dos</h3>
+          <p>←</p>
+        </div>
+      </div>
+      <a href="#">Derecha</a>
+      <div class="movimientos">
+        <div class="ejemplo">
+          <h3>Corredor Uno</h3>
+          <p>D</p>
+        </div>
+        <div class="ejemplo2">
+          <h3>Corredor Dos</h3>
+          <p>→</p>
+        </div>
+        <a class="closebtn" onclick="closeNav()"> ↩︎</a>
+      </div>
     </div>
   </div>
 
-<div id="ponycs" class="overlay">
-  <a onclick="closeNav()" class="closebtn">&times;</a>
-  <div class="overlay-content">
-    <div>
-      <h2>Elige tu corredor</h2>
-      <p>Corredor 1</p>
-      <a onclick="characterF('poni1')" type="button" class="runner one btn waves-effect"></a>
-      <a onclick="characterF('poni2')" type="button" class="runner two btn waves-effect"></a>
-      <a onclick="characterF('poni3')" type="button" class="runner three btn waves-effect"></a>
-      <a onclick="characterF('poni4')" type="button" class="runner four btn waves-effect"></a>
-      <a onclick="characterF('poni5')" type="button" class="runner five btn waves-effect"></a>
-      <a type="button" class="runner six btn waves-effect" onclick="characterF('poni6')"></a>
-      <a type="button" class="runner seven btn waves-effect" onclick="characterF('poni7')"></a>
-      <a type="button" class="runner eight btn waves-effect" onclick="characterF('poni8')"></a>
+
+  <div id="ponycs" class="overlay">
+    <a onclick="closeNav()" class="closebtn">&times;</a>
+    <div class="overlay-content">
+      <div>
+        <h2>Elige tu corredor</h2>
+        <p>Corredor 1</p>
+        <a onclick="characterF('poni1')" type="button" class="runner one btn waves-effect"></a>
+        <a onclick="characterF('poni2')" type="button" class="runner two btn waves-effect"></a>
+        <a onclick="characterF('poni3')" type="button" class="runner three btn waves-effect"></a>
+        <a onclick="characterF('poni4')" type="button" class="runner four btn waves-effect"></a>
+        <a onclick="characterF('poni5')" type="button" class="runner five btn waves-effect"></a>
+        <a type="button" class="runner six btn waves-effect" onclick="characterF('poni6')"></a>
+        <a type="button" class="runner seven btn waves-effect" onclick="characterF('poni7')"></a>
+        <a type="button" class="runner eight btn waves-effect" onclick="characterF('poni8')"></a>
+      </div>
+      <div>
+        <h2>Corredor 2</h2>
+        <a type="button" class="runner nine btn waves-effect" onclick="characterSonic('sonic1')"></a>
+        <a type="button" class="runner ten btn waves-effect" onclick="characterSonic('sonic2')"></a>
+      </div>
+      <a type="button" class="btn" onclick="closeNav()">OK</a>
     </div>
-    <div>
-      <h2>Corredor 2</h2>
-      <a type="button" class="runner nine btn waves-effect" onclick="characterSonic('sonic1')"></a>
-      <a type="button" class="runner ten btn waves-effect" onclick="characterSonic('sonic2')"></a>
-    </div>
-    <a type="button" class="btn" onclick="closeNav()" >OK</a>
   </div>
-</div>
 
   <nav>
     <ul>
-      <li><a 
-        class="btn-floating" 
-        type="button" 
-        href="/../Ponic/client/index.html">
-        <i
-        class="fas fa-play-circle"></i></a></li>
-      <li><a 
-        class="btn-floating open" 
-        type="button" 
-        role="button"
-        onclick="openNav()"><i
-         class="fas fa-gamepad"></i></a></li>
-      <li><a 
-        class="btn-floating" 
-        type="button" 
-        role="button">
-        <i
-         class="fas fa-cogs"></i></a></li>
-      <li><a 
-        class="btn-floating" 
-        type="button">
-        <i 
-        class="fas fa-info"></i></a></li>
+      <li><a class="btn-floating" type="button" href="/../Ponic/client/index.html">
+          <i class="fas fa-play-circle"></i></a></li>
+      <li><a class="btn-floating open" type="button" role="button" onclick="openNav()"><i
+            class="fas fa-gamepad"></i></a></li>
+      <li><a class="btn-floating" type="button" role="button">
+          <i class="fas fa-cogs"></i></a></li>
+      <li><a class="btn-floating" type="button">
+          <i class="fas fa-info"></i></a></li>
     </ul>
   </nav>
-  
-<!-- NO BORRAR¡¡ <button onclick="character('ponic')">Ponic</button>
-  <button onclick="character('otro')">Otro</button> -->
-  
 
-  
-  
-          
-        
-  
-  
-      
-      
-       
-    
-   
+  <!-- NO BORRAR¡¡ <button onclick="character('ponic')">Ponic</button>
+  <button onclick="character('otro')">Otro</button> -->
 
 
     

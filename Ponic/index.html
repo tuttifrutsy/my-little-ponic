@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+      integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link rel="icon" href="/Ponic/client/assets/images/PinClipart.com_rainbow-dash-clipart_2712304.png" type="image" sizes="16x16">
+  <link rel="stylesheet" href="/Ponic/client/css/style.css">
+  <title>Ponic Game</title>
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row">
+      <div class=" col-3">
+        <img
+         src="/Ponic/client/assets/images/PinClipart.com_rainbow-dash-clipart_2712304.png" 
+         alt="ponic-logo" 
+         class="logo">
+      </div>
+
+      <div class=" col-6">
+        <div id="countdown"></div>
+        <progress 
+        value="0" 
+        max="60" 
+        id="progressBar"></progress>
+      </div>
+
+      <div class="col-3">
+        <img 
+        src="/Ponic/client/assets/images/ponic-title-2.png" 
+        alt="ponic-title-2" 
+        width="120">
+      </div>
+
+    </div>
+
+    <div class="row">
+      <div class=" col-3">
+        <div class="player">
+          <img 
+          id="logoRunner1" 
+          class="logo" 
+          src="/Ponic/client/assets/images/ponic-nube-01.png" 
+          alt="ponic-nube-01">
+          <h4 id="runnerOne">Rainbow Dash</h4>
+
+          <div class="score">
+              <div 
+              class="life">
+                <img 
+                class="icon" 
+                src="/Ponic/client/assets/images/Heart_PNG_Image_Free_Download_31683.png" 
+                alt="heart">
+                <span 
+                id="life">3</span>
+              </div>
+              <div class="points">
+                <img 
+                class="icon" 
+                src="/Ponic/client/assets/images/ponic-manzana-01.png" 
+                alt="ponic-manzana-01">
+                <span id="points">0</span>
+              </div>
+          </div>
+
+          <!-- <div class="control">
+            <button onclick="rainbowDash.moveUp()" data-key="38">👆🏻</button>
+            <button onclick="rainbowDash.moveDown()"  data-key="40">👇🏻</button>
+            <button onclick="rainbowDash.moveLeft()"  data-key="37">👈🏻</button>
+            <button onclick="rainbowDash.moveRight()"  data-key="39">👉🏻</button>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="scene col-6" id="winners" >
+        
+        <canvas id="canvas" width="350px" height="600"></canvas>
+
+        <div id="runnerWin">
+            <div class="bg-text-poni">
+              <h2>Felicidades</h2>
+              <h1>Ponic</h1>
+              <p> Es el ganador</p>
+              <a class="btn" href="/index.html"><i class="fas fa-sync"></i></a>
+            </div>
+        </div>
+
+        <div id="runnerWinTwo">
+            <div class="bg-text-sonic">
+              <h2>Felicidades</h2>
+              <h1>Sonic</h1>
+              <p>Es el vencedor</p>
+              <a class="btn" href="/index.html"><i class="fas fa-sync"></i></a>
+            </div>
+        </div>
+
+        <div id="empate">
+          <div class="bg-text-poni">
+            <p>Suerte la próxima vez..</p>
+            <a class="btn" href="/index.html" ><i class="fas fa-sync"></i></a>
+          </div>
+        </div>
+             
+      </div>
+
+      <div class="col-3">
+
+        
+          <div class="player2">
+
+            <img 
+            id="logoRunner2" 
+            class="logo" 
+            src="/Ponic/client/assets/images/sonic-logo-500x375.png" 
+            alt="sonic-move">
+            <h4 
+            id="runnerTwo">Sonic</h4><br>
+            <div 
+            class="score">
+              <div class="life2">
+                <img  
+                class="icon" 
+                src="/Ponic/client/assets/images/Heart_PNG_Image_Free_Download_31683.png" 
+                alt="ponic-manzana-01">
+                <span id="life2">3</span>
+              </div>
+              <div class="points2">
+                <img 
+                class="icon" 
+                src="/Ponic/client/assets/images/ponic-ring-002.png" 
+                alt="ponic-ring-002">
+                <span id="points2">0</span>
+              </div>
+            
+            </div>
+          </div>
+          <!-- <div class="control">
+            <button onclick="sonic.moveUp()" data-key="38">👆🏻</button>
+            <button onclick="sonic.moveDown()" data-key="40">👇🏻</button>
+            <button onclick="sonic.moveLeft()" data-key="37">👈🏻</button>
+            <button onclick="sonic.moveRight()" data-key="39">👉🏻</button>
+          </div> -->
+      </div>
+
+    </div>
+
+
+  </div>
+        
+     
+
+
+
+
+
+
+
+
+<script src="/Ponic/client/client-js/main.js"></script>
+<script src="/Ponic/client/client-js/app.js"></script>
+<script src="/Ponic/client/client-js/ponics.js"></script>
+</body>
+</html>
